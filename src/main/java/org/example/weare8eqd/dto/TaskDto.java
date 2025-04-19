@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class TaskDto {
 
+    @NotBlank(message = "subject is required")
     String subject;
 
     @NotBlank(message = "title is required")
@@ -23,13 +24,16 @@ public class TaskDto {
     @NotNull(message = "user id is required")
     Integer userId;
 
-    String description;
+    @NotNull(message = "deadline is required")
+    LocalDateTime deadline;
 
-    Priority priority;
-
+    @NotNull(message = "type (HOMEWORK, BIG_HOMEWORK, PRACTISE, PREPARATION) is required")
     TypeOfTask typeOfTask;
 
-    LocalDateTime deadline;
+    @NotNull(message = "priority (LOW, MEDIUM, HIGH) is required")
+    Priority priority;
+
+    String description;
 
     LocalDateTime started;
 

@@ -5,6 +5,5 @@ public enum TypeOfTask {
     BIG_HOMEWORK,
     PRACTISE,
     PREPARATION
-
 }
 

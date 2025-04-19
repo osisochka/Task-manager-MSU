@@ -1,22 +1,19 @@
 package org.example.weare8eqd.service.serviceimpl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.weare8eqd.domain.Task;
 import org.example.weare8eqd.domain.User;
+import org.example.weare8eqd.dto.CantCreateTaskException;
+import org.example.weare8eqd.dto.ItemNotFoundException;
 import org.example.weare8eqd.dto.TaskDto;
 import org.example.weare8eqd.dto.UpdateTaskDto;
 import org.example.weare8eqd.repository.TaskRepository;
 import org.example.weare8eqd.repository.UserRepository;
 import org.example.weare8eqd.service.TaskService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,18 +22,81 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
 
+    @Override
+    @Transactional
+    public int createTask(TaskDto request) {
+
+        User user = userRepository.findById(request.getUserId()).orElseThrow(
+                () -> new CantCreateTaskException("user with id=" + request.getUserId() + " not found")
+        );
+
+        Task task = taskRepository.save(toEntity(request, user));
+
+        return task.getTaskId();
+    }
+
+    @Override
+    public TaskDto getTaskById(Integer taskId) {
+
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new ItemNotFoundException("task with id=" + taskId + " not found")
+        );
+
+        return toDto(task);
+    }
+
+    @Override
+    public List<TaskDto> getTasksByUserId(Integer userId) {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new ItemNotFoundException("user with id=" + userId + " not found")
+        );
+
+        return taskRepository.findAllByUser(user).stream().map(this::toDto).toList();
+    }
+
+    @Override
+    @Transactional
+    public void updateTask(Integer taskId, UpdateTaskDto request) {
+
+        Task task = taskRepository.findById(taskId).orElseThrow(
+                () -> new ItemNotFoundException("task with id=" + taskId + " not found")
+        );
+
+        if (request.getSubject() != null) task.setSubject(request.getSubject());
+        if (request.getTitle() != null) task.setTitle(request.getTitle());
+        if (request.getDescription() != null) task.setDescription(request.getDescription());
+        if (request.getPriority() != null) task.setPriority(request.getPriority());
+        if (request.getTypeOfTask() != null) task.setTypeOfTask(request.getTypeOfTask());
+        if (request.getDeadline() != null) task.setDeadline(request.getDeadline());
+        if (request.getFinished() != null) task.setFinished(request.getFinished());
+
+        taskRepository.save(task);
+    }
+
+    @Override
+    @Transactional
+    public void deleteTask(Integer taskId) {
+
+        if (taskRepository.existsById(taskId)) taskRepository.deleteById(taskId);
+        else throw new ItemNotFoundException("task with id=" + taskId + " not found");
+    }
+
     private TaskDto toDto(Task task) {
-        TaskDto dto = new TaskDto();
-        dto.setSubject(task.getSubject());
-        dto.setTitle(task.getTitle());
-        dto.setDescription(task.getDescription());
-        dto.setPriority(task.getPriority());
-        dto.setTypeOfTask(task.getTypeOfTask());
-        dto.setDeadline(task.getDeadline());
-        dto.setStarted(task.getStarted());
-        dto.setFinished(task.getFinished());
-        dto.setUserId(task.getUser().getUserId());
-        return dto;
+
+        if (task == null) return null;
+
+        return TaskDto.builder()
+                .subject(task.getSubject())
+                .title(task.getTitle())
+                .description(task.getDescription())
+                .priority(task.getPriority())
+                .typeOfTask(task.getTypeOfTask())
+                .deadline(task.getDeadline())
+                .started(task.getStarted())
+                .finished(task.getFinished())
+                .userId(task.getUser().getUserId())
+                .build();
     }
 
     private Task toEntity(TaskDto dto, User user) {
@@ -52,81 +112,4 @@ public class TaskServiceImpl implements TaskService {
                 .user(user)
                 .build();
     }
-
-
-    @Override
-    public TaskDto getTaskById(Integer taskId) {
-        return taskRepository.findById(taskId)
-                .map(this::toDto)
-                .orElse(null);
-    }
-
-    @Override
-    public boolean createTask(TaskDto request) {
-        Optional<User> userOpt = userRepository.findById(request.getUserId());
-        if (userOpt.isEmpty()) return false;
-        Task task = toEntity(request, userOpt.get());
-        taskRepository.save(task);
-        return true;
-    }
-
-    @Override
-    public boolean updateTask(Integer taskId, UpdateTaskDto request) {
-        Optional<Task> taskOpt = taskRepository.findById(taskId);
-        if (taskOpt.isEmpty()) return false;
-        Task task = taskOpt.get();
-
-        if (request.getSubject() != null) {
-            task.setSubject(request.getSubject());
-        }
-        if (request.getTitle() != null) {
-            task.setTitle(request.getTitle());
-        }
-        if (request.getDescription() != null) {
-            task.setDescription(request.getDescription());
-        }
-        if (request.getPriority() != null) {
-            task.setPriority(request.getPriority());
-        }
-        if (request.getTypeOfTask() != null) {
-            task.setTypeOfTask(request.getTypeOfTask());
-        }
-        if (request.getDeadline() != null) {
-            task.setDeadline(request.getDeadline());
-        }
-        if (request.getStarted() != null) {
-            task.setStarted(request.getStarted());
-        }
-        if (request.getFinished() != null) {
-            task.setFinished(request.getFinished());
-        }
-        if (request.getUserId() != null) {
-            Optional<User> userOpt = userRepository.findById(request.getUserId());
-            userOpt.ifPresent(task::setUser);
-        }
-        taskRepository.save(task);
-        return true;
-    }
-
-
-    @Override
-    public List<TaskDto> getTaskByUser(Integer userId) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) return List.of();
-        List<Task> tasks = taskRepository.findAllByUser(userOpt.get());
-        return tasks.stream().map(this::toDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public boolean deleteTask(Integer taskId) {
-        if (!taskRepository.existsById(taskId)) return false;
-        taskRepository.deleteById(taskId);
-        return true;
-    }
-
-    @Override
-    public Page<TaskDto> getUserTask(Integer userId, int page, int size) {
-        return null;
-    }
-
 }

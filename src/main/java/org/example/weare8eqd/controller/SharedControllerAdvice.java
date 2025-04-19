@@ -1,5 +1,6 @@
 package org.example.weare8eqd.controller;
 
+import org.example.weare8eqd.dto.ExceptionResponse;
 import org.example.weare8eqd.dto.ItemAlreadyExistsException;
 import org.example.weare8eqd.dto.ItemNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -8,14 +9,24 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestControllerAdvice
 public class SharedControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ExceptionResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        e.getBindingResult().getFieldErrors().forEach(
+                error -> errors.put(error.getField(), error.getDefaultMessage())
+        );
+
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new ExceptionResponse(e.getMessage()));
+                .body(errors);
     }
 
     @ExceptionHandler(ItemAlreadyExistsException.class)
@@ -31,8 +42,4 @@ public class SharedControllerAdvice {
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ExceptionResponse(e.getMessage()));
     }
-
-    public record ExceptionResponse(
-            String message
-    ) {}
 }

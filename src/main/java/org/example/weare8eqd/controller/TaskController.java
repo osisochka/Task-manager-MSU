@@ -1,9 +1,9 @@
 package org.example.weare8eqd.controller;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.example.weare8eqd.dto.*;
 import org.example.weare8eqd.service.TaskService;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,61 +12,47 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tasks")
+@RequiredArgsConstructor
 public class TaskController {
 
     private final TaskService taskService;
 
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
-
     @PostMapping
-    public HttpStatus createTask(
+    public ResponseEntity<String> createTask(
             @RequestBody @Valid TaskDto taskDto) {
-        if (taskService.createTask(taskDto)) {
-            return HttpStatus.CREATED;
-        }
-        return HttpStatus.CONFLICT;
-    }
 
+        int id = taskService.createTask(taskDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("task with id=" + id + " successfully created");
+    }
 
     @GetMapping("/{taskId}")
     public ResponseEntity<TaskDto> getTask(
             @PathVariable Integer taskId) {
-        TaskDto task = taskService.getTaskById(taskId);
-        return ResponseEntity.ok(task);
+
+        return ResponseEntity.ok(taskService.getTaskById(taskId));
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<TaskDto>> getTasksByUser(
             @PathVariable Integer userId) {
-        List<TaskDto> tasks = taskService.getTaskByUser(userId);
-        return ResponseEntity.ok(tasks);
-    }
 
-    @GetMapping("/user/{userId}/paged")
-    public ResponseEntity<Page<TaskDto>> getTasksByUserPaged(
-            @PathVariable Integer userId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Page<TaskDto> tasks = taskService.getUserTask(userId, page, size);
-        return ResponseEntity.ok(tasks);
+        return ResponseEntity.ok(taskService.getTasksByUserId(userId));
     }
 
     @PutMapping("/{taskId}")
-    public HttpStatus updateTask(
+    public ResponseEntity<String> updateTask(
             @PathVariable Integer taskId,
             @RequestBody @Valid UpdateTaskDto updateTaskDto) {
-        if (taskService.updateTask(taskId, updateTaskDto)) {
-            return HttpStatus.OK;
-        }
-        return HttpStatus.CONFLICT;
+
+        taskService.updateTask(taskId, updateTaskDto);
+        return ResponseEntity.ok("task with id=" + taskId + " successfully updated");
     }
 
     @DeleteMapping("/{taskId}")
-    public ResponseEntity<Void> deleteTask(
+    public ResponseEntity<String> deleteTask(
             @PathVariable Integer taskId) {
+
         taskService.deleteTask(taskId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("task with id=" + taskId + " successfully deleted");
     }
 }

@@ -2,7 +2,6 @@ package org.example.weare8eqd.service;
 
 import org.example.weare8eqd.dto.TaskDto;
 import org.example.weare8eqd.dto.UpdateTaskDto;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -10,14 +9,12 @@ public interface TaskService {
 
     TaskDto getTaskById(Integer orderId);
 
-    boolean createTask(TaskDto request);
+    int createTask(TaskDto request);
 
-    boolean updateTask(Integer taskId, UpdateTaskDto request);
+    void updateTask(Integer taskId, UpdateTaskDto request);
 
-    List<TaskDto> getTaskByUser(Integer userId);
+    List<TaskDto> getTasksByUserId(Integer userId);
 
-    boolean deleteTask(Integer taskId);
-
-    Page<TaskDto> getUserTask(Integer userId, int page, int size);
+    void deleteTask(Integer taskId);
 }
 

@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(Long userId) {
-        return userRepository.findById(userId.intValue())
+    public UserDto getUser(Integer userId) {
+        return userRepository.findById(userId)
                 .map(this::toDto)
                 .orElse(null);
     }
@@ -64,10 +64,10 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean updateUser(Long userId, UpdateUserDto updateUserDto) {
-        return userRepository.findById(userId.intValue()).map(user -> {
-            if (updateUserDto.getGivenName() != null) user.setGivenName(updateUserDto.getGivenName());
-            if (updateUserDto.getFamilyName() != null) user.setFamilyName(updateUserDto.getFamilyName());
+    public boolean updateUser(Integer userId, UpdateUserDto updateUserDto) {
+        return userRepository.findById(userId).map(user -> {
+            user.setGivenName(updateUserDto.getGivenName());
+            user.setFamilyName(updateUserDto.getFamilyName());
             userRepository.save(user);
             return true;
         }).orElse(false);
@@ -75,9 +75,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean deleteUser(Long userId) {
-        if (userRepository.existsById(userId.intValue())) {
-            userRepository.deleteById(userId.intValue());
+    public boolean deleteUser(Integer userId) {
+        if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
             return true;
         }
         return false;

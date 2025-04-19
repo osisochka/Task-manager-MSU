@@ -10,14 +10,14 @@ public interface UserService {
 
     boolean addUser(CreateUserDto createUserDto);
 
-    UserDto getUser(Long userId);
+    UserDto getUser(Integer userId);
 
     UserDto getUserByLogin(String login);
 
     List<UserDto> getAllUsers();
 
-    boolean updateUser(Long userId, UpdateUserDto updateUserDto);
+    boolean updateUser(Integer userId, UpdateUserDto updateUserDto);
 
-    boolean deleteUser(Long userId);
+    boolean deleteUser(Integer userId);
 
 }

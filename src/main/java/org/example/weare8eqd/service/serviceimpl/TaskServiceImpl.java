@@ -80,7 +80,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public boolean updateTask(Integer taskId, TaskDto request) {
+    public boolean updateTask(Integer taskId, UpdateTaskDto request) {
 //        Optional<Task> taskOpt = taskRepository.findById(taskId);
 //        if (taskOpt.isEmpty()) return false;
 //        Task task = taskOpt.get();

@@ -12,9 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,8 +33,8 @@ public class TaskServiceImpl implements TaskService {
         dto.setPriority(task.getPriority());
         dto.setTypeOfTask(task.getTypeOfTask());
         dto.setDeadline(task.getDeadline());
-        dto.setStarted(task.getDeadline());
-        dto.setFinished(task.getDeadline());
+        dto.setStarted(task.getStarted());
+        dto.setFinished(task.getFinished());
         dto.setUserId(task.getUser().getUserId());
         return dto;
     }
@@ -99,7 +98,7 @@ public class TaskServiceImpl implements TaskService {
             task.setStarted(request.getStarted());
         }
         if (request.getFinished() != null) {
-            task.setFinished(request.getStarted());
+            task.setFinished(request.getFinished());
         }
         if (request.getUserId() != null) {
             Optional<User> userOpt = userRepository.findById(request.getUserId());
@@ -127,13 +126,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Page<TaskDto> getUserTask(Integer userId, int page, int size) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) {
-            return Page.empty();
-        }
-        User user = userOpt.get();
-
-        Page<Task> tasksPage = taskRepository.findAllByUser(user, (Pageable) PageRequest.of(page, size));
-        return tasksPage.map(this::toDto);
+        return null;
     }
+
 }

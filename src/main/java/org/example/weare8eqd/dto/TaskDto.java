@@ -2,32 +2,36 @@ package org.example.weare8eqd.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 import org.example.weare8eqd.domain.Priority;
 import org.example.weare8eqd.domain.TypeOfTask;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class TaskDto {
+
     String subject;
 
-    @NotBlank
+    @NotBlank(message = "title is required")
     String title;
-    String description;
-    Priority priority;
-    TypeOfTask typeOfTask;
-    LocalDateTime deadline;
-    LocalDateTime started;
-    LocalDateTime finished;
 
-    @NotNull
+    @NotNull(message = "user id is required")
     Integer userId;
+
+    String description;
+
+    Priority priority;
+
+    TypeOfTask typeOfTask;
+
+    LocalDateTime deadline;
+
+    LocalDateTime started;
+
+    LocalDateTime finished;
 }

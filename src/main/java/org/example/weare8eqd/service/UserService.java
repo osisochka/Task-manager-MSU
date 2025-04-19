@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserService {
 
-    boolean addUser(CreateUserDto createUserDto);
+    int addUser(CreateUserDto createUserDto);
 
     UserDto getUser(Integer userId);
 
@@ -16,8 +16,8 @@ public interface UserService {
 
     List<UserDto> getAllUsers();
 
-    boolean updateUser(Integer userId, UpdateUserDto updateUserDto);
+    void updateUser(Integer userId, UpdateUserDto updateUserDto);
 
-    boolean deleteUser(Integer userId);
+    void deleteUser(Integer userId);
 
 }

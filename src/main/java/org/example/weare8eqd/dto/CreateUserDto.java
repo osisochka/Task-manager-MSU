@@ -2,25 +2,24 @@ package org.example.weare8eqd.dto;
 
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class CreateUserDto {
-    @NotBlank
+
+    @NotBlank(message = "first name is required")
     String givenName;
 
-    @NotBlank
+    @NotBlank(message = "last name is required")
     String familyName;
 
-    @NotBlank
+    @NotBlank(message = "login is required")
     String login;
 
-    @NotBlank
+    @NotBlank(message = "password is required")
     String password;
 }

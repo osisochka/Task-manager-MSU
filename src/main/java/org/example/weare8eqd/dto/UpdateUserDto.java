@@ -1,22 +1,15 @@
 package org.example.weare8eqd.dto;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
-import java.util.Set;
+import lombok.Builder;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class UpdateUserDto {
     String givenName;
     String familyName;
     String login;
-    Set<String> friends; // login list
-    List<Integer> tasks;
 }

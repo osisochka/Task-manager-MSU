@@ -1,6 +1,7 @@
 package org.example.weare8eqd.controller;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.example.weare8eqd.dto.*;
 import org.example.weare8eqd.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -11,63 +12,53 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @PostMapping
-    public HttpStatus createUser(
+    public ResponseEntity<String> createUser(
             @RequestBody @Valid CreateUserDto createUserDto) {
-        boolean created = userService.addUser(createUserDto);
-        return created
-                ? HttpStatus.CREATED
-                : HttpStatus.BAD_REQUEST;
+
+        int id = userService.addUser(createUserDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body("user with id=" + id + " successfully created");
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserDto> getUser(
             @PathVariable Integer userId) {
-        UserDto user = userService.getUser(userId);
-        return user != null
-                ? ResponseEntity.ok(user)
-                : ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(userService.getUser(userId));
     }
 
     @GetMapping("/login/{login}")
     public ResponseEntity<UserDto> getUserByLogin(
             @PathVariable String login) {
-        UserDto user = userService.getUserByLogin(login);
-        return user != null
-                ? ResponseEntity.ok(user)
-                : ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(userService.getUserByLogin(login));
     }
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{userId}")
-    public HttpStatus updateUser(
+    public ResponseEntity<String> updateUser(
             @PathVariable Integer userId,
             @RequestBody @Valid UpdateUserDto updateUserDto) {
-        boolean updated = userService.updateUser(userId, updateUserDto);
-        return updated
-                ? HttpStatus.OK
-                : HttpStatus.BAD_REQUEST;
+
+        userService.updateUser(userId, updateUserDto);
+        return ResponseEntity.ok("user with id=" + userId + " successfully updated");
     }
 
     @DeleteMapping("/{userId}")
-    public HttpStatus deleteUser(
+    public ResponseEntity<String> deleteUser(
             @PathVariable Integer userId) {
-        boolean deleted = userService.deleteUser(userId);
-        return deleted
-                ? HttpStatus.OK
-                : HttpStatus.NOT_FOUND;
+
+        userService.deleteUser(userId);
+        return ResponseEntity.ok("user with id=" + userId + " successfully deleted");
     }
 }

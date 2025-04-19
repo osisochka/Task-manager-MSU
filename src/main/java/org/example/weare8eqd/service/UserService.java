@@ -1,19 +1,23 @@
 package org.example.weare8eqd.service;
 
+import org.example.weare8eqd.dto.CreateUserDto;
+import org.example.weare8eqd.dto.UpdateUserDto;
+import org.example.weare8eqd.dto.UserDto;
+
 import java.util.List;
 
 public interface UserService {
 
-    CreatedDto addUser(CreateUserDto createUserDto);
+    boolean addUser(CreateUserDto createUserDto);
 
-    UserResponseDto getUser(Long userId);
+    UserDto getUser(Long userId);
 
-    UserResponseDto getUserByLogin(String login);
+    UserDto getUserByLogin(String login);
 
-    List<UserResponseDto> getAllUsers();
+    List<UserDto> getAllUsers();
 
-    UpdatedDto updateUser(Long userId, UpdateUserDto updateUserDto);
+    boolean updateUser(Long userId, UpdateUserDto updateUserDto);
 
-    DeletedDto deleteUser(Long userId);
+    boolean deleteUser(Long userId);
 
 }

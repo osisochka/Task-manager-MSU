@@ -1,20 +1,19 @@
 package org.example.weare8eqd.service;
 
-import org.example.weare8eqd.domain.User;
-import org.example.weare8eqd.dto.UserDto;
+import java.util.List;
 
-public class UserService {
-    public void addUser(UserDto userDTO) {
-        String givenName = userDTO.getGivenName();
-        String familyName = userDTO.getFamilyName();
-        String middleName = userDTO.getMiddleName();
-        String login = userDTO.getLogin();
-        String[] friends = userDTO.getFriends();
-        int[] activeTasks = userDTO.getActiveTasks();
-        int[] finishedTasks = userDTO.getFinishedTasks();
-        long id = 1;
+public interface UserService {
 
-        User newUser = new User(id, givenName, familyName, middleName, login, friends, activeTasks, finishedTasks);
-    }
+    CreatedDto addUser(CreateUserDto createUserDto);
+
+    UserResponseDto getUser(Long userId);
+
+    UserResponseDto getUserByLogin(String login);
+
+    List<UserResponseDto> getAllUsers();
+
+    UpdatedDto updateUser(Long userId, UpdateUserDto updateUserDto);
+
+    DeletedDto deleteUser(Long userId);
+
 }
-

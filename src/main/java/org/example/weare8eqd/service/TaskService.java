@@ -1,18 +1,19 @@
 package org.example.weare8eqd.service;
 
-import org.example.weare8eqd.domain.Task;
-import org.example.weare8eqd.dto.TaskDto;
+import org.springframework.data.domain.Page;
 
-import java.util.Date;
+import java.util.List;
 
-public class TaskService {
-    public void addTask(TaskDto taskDto) {
-        String title = taskDto.getTitle();
-        String description = taskDto.getDescription();
-        Date deadline = taskDto.getDeadline();
-        Date started = taskDto.getStarted();
-        Date finished = taskDto.getFinished();
-        long id = 1;
-        Task newTask = new Task(id, title, description, deadline, started, finished);
-    }
+public interface TaskService {
+
+    TaskResponseDto getTaskById(Long orderId);
+
+    TaskResponseDto createTask(CreateTaskRequestDto request);
+
+    TaskResponseDto updateTask(Long taskId, UpdateTaskDto request);
+
+    List<UserTasksResponseDto> getTaskByUser(Long userId);
+
+    DeleteTaskdDto deleteTask(Long taskId);
+
 }

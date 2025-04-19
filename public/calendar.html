@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календарь - Студенческий Дашборд</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calendar-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="img/MSU_2 2.svg" alt="МГУ">
+        </div>
+        <a href="index.html" class="menu-item">
+            <img src="img/icons/iconoir_home-simple.svg" alt="Home">
+        </a>
+        <a href="calendar.html" class="menu-item active">
+            <img src="img/icons/iconoir_calendar.svg" alt="Calendar">
+        </a>
+        <a href="tasks.html" class="menu-item">
+            <img src="img/icons/iconoir_task-list.svg" alt="Tasks">
+        </a>
+        <a href="schedule.html" class="menu-item">
+            <img src="img/icons/iconoir_timer.svg" alt="Schedule">
+        </a>
+        <a href="profile.html" class="menu-item">
+            <img src="img/icons/iconoir_user.svg" alt="Profile">
+        </a>
+    </aside>
+
+    <main class="content">
+        <div class="left-menu">
+            <div class="create-button-container">
+                <button class="create-btn">
+                    <span>+</span> Create
+                </button>
+            </div>
+
+            <div class="left-calendar-container">
+                <div class="calendar-header">
+                    <h3>April 2025</h3>
+                    <div class="month-navigation">
+                        <button class="nav-btn">&lt;</button>
+                        <button class="nav-btn">&gt;</button>
+                    </div>
+                </div>
+                
+                <div class="calendar-body">
+                    <div class="weekday-row">
+                        <div class="weekday">S</div>
+                        <div class="weekday">M</div>
+                        <div class="weekday">T</div>
+                        <div class="weekday">W</div>
+                        <div class="weekday">T</div>
+                        <div class="weekday">F</div>
+                        <div class="weekday">S</div>
+                    </div>
+                    
+                    <div class="date-grid">
+                        <div class="day prev-month">30</div>
+                        <div class="day prev-month">31</div>
+                        <div class="day">1</div>
+                        <div class="day">2</div>
+                        <div class="day">3</div>
+                        <div class="day">4</div>
+                        <div class="day">5</div>
+                        <div class="day">6</div>
+                        <div class="day">7</div>
+                        <div class="day">8</div>
+                        <div class="day">9</div>
+                        <div class="day">10</div>
+                        <div class="day">11</div>
+                        <div class="day">12</div>
+                        <div class="day">13</div>
+                        <div class="day">14</div>
+                        <div class="day">15</div>
+                        <div class="day">16</div>
+                        <div class="day">17</div>
+                        <div class="day">18</div>
+                        <div class="day current">19</div>
+                        <div class="day">20</div>
+                        <div class="day">21</div>
+                        <div class="day">22</div>
+                        <div class="day">23</div>
+                        <div class="day">24</div>
+                        <div class="day">25</div>
+                        <div class="day">26</div>
+                        <div class="day">27</div>
+                        <div class="day">28</div>
+                        <div class="day">29</div>
+                        <div class="day">30</div>
+                        <div class="day next-month">1</div>
+                        <div class="day next-month">2</div>
+                        <div class="day next-month">3</div>
+                        <div class="day next-month">4</div>
+                        <div class="day next-month">5</div>
+                        <div class="day next-month">6</div>
+                        <div class="day next-month">7</div>
+                        <div class="day next-month">8</div>
+                        <div class="day next-month">9</div>
+                        <div class="day next-month">10</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subjects-list">
+                <h3>Предметы:</h3>
+                <div class="subject-item">
+                    <div class="checkbox math checked" data-subject="math">
+                        <span class="check-icon">✓</span>
+                    </div>
+                    <span>Математика</span>
+                </div>
+                <div class="subject-item">
+                    <div class="checkbox discrete-math checked" data-subject="discrete-math">
+                        <span class="check-icon">✓</span>
+                    </div>
+                    <span>Дискретная математика</span>
+                </div>
+                <div class="subject-item">
+                    <div class="checkbox english checked" data-subject="english">
+                        <span class="check-icon">✓</span>
+                    </div>
+                    <span>Английский язык</span>
+                </div>
+                <div class="subject-item">
+                    <div class="checkbox pe checked" data-subject="pe">
+                        <span class="check-icon">✓</span>
+                    </div>
+                    <span>Физкультура</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-content">
+            <div class="calendar-header">
+                <div class="search-container">
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search">
+                        <img src="img/icons/akar-icons_search.svg" alt="Search">
+                    </div>
+                </div>
+                <div class="calendar-navigation">
+                    <div class="date-navigation">
+                        <span>Сегодня</span>
+                        <div class="nav-arrows">
+                            <button class="nav-arrow prev">&lt;</button>
+                            <span class="current-period">14 апреля - 20, 2025</span>
+                            <button class="nav-arrow next">&gt;</button>
+                        </div>
+                    </div>
+                    <div class="view-options">
+                        <button class="view-option">Год</button>
+                        <button class="view-option active">Неделя</button>
+                        <button class="view-option">Месяц</button>
+                        <button class="view-option">День</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-grid week-view">
+                <div class="time-column">
+                    <div class="time-slot">00:00</div>
+                    <div class="time-slot">01:00</div>
+                    <div class="time-slot">02:00</div>
+                    <div class="time-slot">03:00</div>
+                    <div class="time-slot">04:00</div>
+                    <div class="time-slot">05:00</div>
+                    <div class="time-slot">06:00</div>
+                    <div class="time-slot">07:00</div>
+                    <div class="time-slot">08:00</div>
+                    <div class="time-slot">09:00</div>
+                    <div class="time-slot">10:00</div>
+                    <div class="time-slot">11:00</div>
+                    <div class="time-slot">12:00</div>
+                    <div class="time-slot">13:00</div>
+                    <div class="time-slot">14:00</div>
+                    <div class="time-slot">15:00</div>
+                    <div class="time-slot">16:00</div>
+                    <div class="time-slot">17:00</div>
+                    <div class="time-slot">18:00</div>
+                    <div class="time-slot">19:00</div>
+                    <div class="time-slot">20:00</div>
+                    <div class="time-slot">21:00</div>
+                    <div class="time-slot">22:00</div>
+                    <div class="time-slot">23:00</div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">понедельник 14</div>
+                    <div class="event math" style="top: 540px; height: 120px;">
+                        <div class="event-time">9:00 - 10:30</div>
+                        <div class="event-title">Лекция матан</div>
+                        <div class="event-location">Аудитория 103</div>
+                    </div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">вторник 15</div>
+                    <div class="event discrete-math" style="top: 540px; height: 120px;">
+                        <div class="event-time">9:00 - 11:00</div>
+                        <div class="event-title">Лекция Дискретная математика</div>
+                        <div class="event-location">Аудитория 103</div>
+                    </div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">среда 16</div>
+                    <div class="event english" style="top: 840px; height: 90px;">
+                        <div class="event-time">14:00 - 15:30</div>
+                        <div class="event-title">Английский язык</div>
+                        <div class="event-location">Аудитория 103</div>
+                    </div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">четверг 17</div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">пятница 18</div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">суббота 19</div>
+                    <div class="event pe" style="top: 600px; height: 120px;">
+                        <div class="event-time">10:00 - 12:00</div>
+                        <div class="event-title">Физкультура</div>
+                        <div class="event-location">Спортзал</div>
+                    </div>
+                </div>
+                <div class="day-column">
+                    <div class="day-header">воскресенье 20</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Кнопка добавления события -->
+    <button id="addEventBtn" title="Добавить событие">+</button>
+    
+    <!-- Модальное окно добавления события -->
+    <div class="modal-overlay" id="addEventModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Добавить событие</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm">
+                    <div class="form-group">
+                        <label for="eventTitle">Название события</label>
+                        <input type="text" id="eventTitle" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventType">Тип события</label>
+                        <select id="eventType" class="form-control" required>
+                            <option value="">Выберите тип</option>
+                            <option value="lecture">Лекция</option>
+                            <option value="practice">Практика</option>
+                            <option value="consultation">Консультация</option>
+                            <option value="exam">Экзамен</option>
+                            <option value="training">Тренировка</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventSubject">Предмет</label>
+                        <select id="eventSubject" class="form-control" required>
+                            <option value="">Выберите предмет</option>
+                            <option value="math">Математика</option>
+                            <option value="discrete-math">Дискретная математика</option>
+                            <option value="english">Английский язык</option>
+                            <option value="pe">Физкультура</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventLocation">Место проведения</label>
+                        <input type="text" id="eventLocation" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="eventDate">Дата</label>
+                        <input type="date" id="eventDate" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="eventStartTime">Время начала</label>
+                            <input type="time" id="eventStartTime" class="form-control" required>
+                        </div>
+                        <div class="form-group half">
+                            <label for="eventEndTime">Время окончания</label>
+                            <input type="time" id="eventEndTime" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="btn-row">
+                        <button type="button" class="btn btn-secondary" id="cancelBtn">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Уведомление -->
+    <div class="notification" id="notification">Событие успешно добавлено</div>
+</div>
+
+<!-- Добавляем модальное окно для создания события -->
+<div class="modal-overlay" id="createEventModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>Создать новое событие</h3>
+            <button class="close-modal" id="closeCreateEventModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="createEventForm">
+                <div class="form-group">
+                    <label for="eventSubject">Предмет</label>
+                    <select id="eventSubject" required>
+                        <option value="">Выберите предмет</option>
+                        <option value="math">Математика</option>
+                        <option value="discrete">Дискретная математика</option>
+                        <option value="english">Английский язык</option>
+                        <option value="pe">Физическая культура</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventType">Тип занятия</label>
+                    <select id="eventType" required>
+                        <option value="">Выберите тип</option>
+                        <option value="lecture">Лекция</option>
+                        <option value="practice">Практика</option>
+                        <option value="lab">Лабораторная</option>
+                        <option value="exam">Экзамен</option>
+                        <option value="consultation">Консультация</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="eventTitle">Название</label>
+                    <input type="text" id="eventTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">Место проведения</label>
+                    <input type="text" id="eventLocation">
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Дата</label>
+                    <input type="date" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventStartTime">Время начала</label>
+                    <input type="time" id="eventStartTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventEndTime">Время окончания</label>
+                    <input type="time" id="eventEndTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDescription">Описание</label>
+                    <textarea id="eventDescription" rows="3"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="cancelCreateEvent">Отмена</button>
+            <button class="btn btn-primary" id="saveEvent">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Добавляем модальное окно для просмотра деталей события -->
+<div class="modal-overlay" id="eventDetailsModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>Детали события</h3>
+            <button class="close-modal" id="closeEventDetailsModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="event-details-header" id="detailsSubjectHeader">
+                <div id="detailsType"></div>
+            </div>
+            <div class="event-details">
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Название:</div>
+                    <div class="event-detail-value" id="detailsTitle"></div>
+                </div>
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Предмет:</div>
+                    <div class="event-detail-value" id="detailsSubject"></div>
+                </div>
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Место:</div>
+                    <div class="event-detail-value" id="detailsLocation"></div>
+                </div>
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Дата:</div>
+                    <div class="event-detail-value" id="detailsDate"></div>
+                </div>
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Время:</div>
+                    <div class="event-detail-value" id="detailsTime"></div>
+                </div>
+                <div class="event-detail-item">
+                    <div class="event-detail-label">Описание:</div>
+                    <div class="event-detail-value" id="detailsDescription"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" id="closeDetails">Закрыть</button>
+        </div>
+    </div>
+</div>
+
+<!-- Добавляем индикатор онлайн/оффлайн статуса -->
+<div class="sync-status" id="syncStatus">
+    <span class="sync-icon">●</span>
+    <span>Онлайн</span>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/calendar.js"></script>
+</body>
+</html> 

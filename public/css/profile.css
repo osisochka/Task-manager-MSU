@@ -1,0 +1,1153 @@
+/* Общие стили профиля */
+:root {
+    --sidebar-width: 80px;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    background: #f5f6f8;
+    min-height: 100vh;
+    margin-left: var(--sidebar-width);
+}
+
+/* Навигация */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: #1a1f3d;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    gap: 50px;
+    z-index: 100;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.logo img:hover {
+    opacity: 1;
+}
+
+.menu-item {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: white;
+}
+
+.menu-item svg {
+    width: 28px;
+    height: 28px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.menu-item.active svg {
+    opacity: 1;
+}
+
+.menu-item:hover svg {
+    opacity: 1;
+}
+
+/* Шапка профиля */
+.profile-header {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profile-cover {
+    height: 300px;
+    background: #7DD3E9;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-cover .msu-building {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.profile-cover .cloud {
+    position: absolute;
+    background: #fff;
+    border-radius: 50px;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-cover .cloud-1 {
+    width: 120px;
+    height: 45px;
+    top: 20%;
+    left: 10%;
+}
+
+.profile-cover .cloud-2 {
+    width: 160px;
+    height: 50px;
+    top: 30%;
+    right: 5%;
+}
+
+.profile-cover .cloud-3 {
+    width: 100px;
+    height: 35px;
+    top: 15%;
+    right: 25%;
+}
+
+.profile-info {
+    display: flex;
+    padding: 0 40px;
+    margin-top: -120px;
+    position: relative;
+    z-index: 2;
+}
+
+.profile-avatar-wrapper {
+    width: 220px;
+    height: 220px;
+    background: #FFB74D;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 30px;
+    border: 10px solid #fff;
+    position: relative;
+    z-index: 3;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-details {
+    padding-top: 140px;
+    padding-left: 20px;
+}
+
+.profile-top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.logout-btn {
+    background-color: #EF4444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.logout-btn:hover {
+    background-color: #DC2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logout-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details h1 {
+    margin: 0;
+    font-size: 48px;
+    color: #6366F1;
+    font-weight: 500;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+}
+
+.profile-details .group {
+    margin: 0 0 25px;
+    color: #888;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 25px;
+    border-radius: 50px;
+    gap: 10px;
+}
+
+.stat-item.friends {
+    background: #6366F1;
+}
+
+.stat-item.points {
+    background: #22C55E;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: white;
+    opacity: 0.9;
+}
+
+/* Основной контент */
+.profile-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    padding: 40px;
+}
+
+/* Секции профиля */
+.profile-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profile-section h2 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* About секция */
+.about-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #666;
+}
+
+.info-item .icon {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.icon.gender { background-image: url('../images/icons/gender.svg'); }
+.icon.birthday { background-image: url('../images/icons/birthday.svg'); }
+.icon.location { background-image: url('../images/icons/location.svg'); }
+.icon.email { background-image: url('../images/icons/email.svg'); }
+.icon.phone { background-image: url('../images/icons/phone.svg'); }
+
+/* Достижения */
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.achievement-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.achievement-icon.deadline { background-image: url('../images/achievements/deadline.svg'); }
+.achievement-icon.procrastinator { background-image: url('../images/achievements/procrastinator.svg'); }
+.achievement-icon.excellent { background-image: url('../images/achievements/excellent.svg'); }
+.achievement-icon.hardcore { background-image: url('../images/achievements/hardcore.svg'); }
+.achievement-icon.elephant { background-image: url('../images/achievements/elephant.svg'); }
+
+.achievement-info {
+    flex: 1;
+}
+
+.achievement-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.achievement-title {
+    font-weight: 500;
+    color: #333;
+}
+
+.achievement-progress {
+    color: #666;
+    font-size: 14px;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: #6366f1;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Боковая панель */
+.profile-sidebar {
+    position: sticky;
+    top: 20px;
+}
+
+.friends-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.see-all {
+    color: #6366f1;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.friend-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.friend-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.friend-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.friend-group {
+    font-size: 12px;
+    color: #666;
+}
+
+.add-friends {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.add-friends h3 {
+    margin: 0 0 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.add-friends a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    text-decoration: none;
+    padding: 8px 0;
+}
+
+.add-friends a:hover {
+    color: #6366f1;
+}
+
+.icon.search { background-image: url('../images/icons/search.svg'); }
+.icon.invite { background-image: url('../images/icons/invite.svg'); }
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .profile-content {
+        grid-template-columns: 1fr;
+        padding: 0 15px 15px;
+    }
+    
+    .profile-sidebar {
+        order: -1;
+    }
+    
+    .profile-stats {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+    
+    .stat-item {
+        flex: 1;
+        min-width: 150px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-info {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .profile-avatar-wrapper {
+        margin: 0 0 20px 0;
+        width: 150px;
+        height: 150px;
+    }
+    
+    .profile-avatar {
+        width: 135px;
+        height: 135px;
+    }
+    
+    .profile-details {
+        padding-top: 0;
+    }
+    
+    .profile-cover {
+        height: 200px;
+    }
+    
+    .profile-cover .msu-building {
+        width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-stats {
+        flex-direction: column;
+    }
+    
+    .stat-item {
+        width: 100%;
+    }
+    
+    .profile-cover {
+        height: 150px;
+    }
+    
+    .profile-cover .msu-building {
+        width: 200px;
+    }
+    
+    .profile-details h1 {
+        font-size: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-cover .cloud,
+    .profile-avatar-wrapper,
+    .profile-avatar img,
+    .stat-item {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* Кнопка "В друзья" */
+.add-friend-btn {
+    background-color: #6366F1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 30px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+
+.add-friend-btn:hover {
+    background-color: #4F46E5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.add-friend-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-friend-btn.added {
+    display: none;
+}
+
+/* Вкладки профиля */
+.profile-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    position: relative;
+}
+
+.tab-btn {
+    border: none;
+    background: transparent;
+    padding: 15px 25px;
+    font-size: 18px;
+    color: #666;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #6366F1;
+}
+
+.tab-btn.active {
+    color: #6366F1;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #6366F1;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Стили для графика и диаграмм */
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.legend-color.tasks {
+    background-color: #6366F1;
+}
+
+.legend-color.study {
+    background-color: #22C55E;
+}
+
+/* Новые цвета для легенды в профиле друга */
+.legend-color.friend {
+    background-color: rgba(37, 99, 235, 1);
+}
+
+.legend-color.you {
+    background-color: rgba(109, 40, 217, 1);
+}
+
+/* Стили для графика при просмотре профиля друга */
+#activity-chart {
+    max-height: 400px;
+}
+
+/* Стили для уведомлений */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #6366F1;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Стили для пустого списка друзей */
+.no-friends {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Стили для поиска друзей */
+.friends-search {
+    display: flex;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#friends-search-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#friends-search-input:focus {
+    border-color: #6366F1;
+}
+
+#friends-search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+#friends-search-btn:hover {
+    color: #6366F1;
+}
+
+.search-results {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.search-results.active {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.search-result-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-name {
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.search-result-group {
+    font-size: 12px;
+    color: #666;
+}
+
+.search-result-action {
+    margin-left: auto;
+}
+
+.add-friend-btn-small {
+    background-color: #6366F1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-friend-btn-small:hover {
+    background-color: #4F46E5;
+}
+
+.add-friend-btn-small.added {
+    background-color: #22C55E;
+}
+
+.find-friends-actions {
+    margin-top: 15px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.no-results {
+    padding: 10px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* Стили для модального окна со всеми друзьями */
+body.modal-open {
+    overflow: hidden;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-container {
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: #EF4444;
+}
+
+.modal-content {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.friends-list-full {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.friend-item-large {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.friend-item-large:hover {
+    background-color: #f5f5f5;
+}
+
+.friend-item-large img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.friend-item-large .friend-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.friend-item-large .friend-name {
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.friend-item-large .friend-group {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Стили для QR-кода */
+.qr-code-container {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#qrcode {
+    display: inline-block;
+    padding: 10px;
+    background-color: #fff;
+}
+
+#qrcode img {
+    display: block;
+    margin: 0 auto;
+}
+
+.invite-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.invite-info {
+    width: 100%;
+    text-align: center;
+}
+
+.invite-info p {
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.invite-link-container {
+    display: flex;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+#invite-link {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+#copy-link-btn {
+    background-color: #6366F1;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#copy-link-btn:hover {
+    background-color: #4F46E5;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-btn.telegram {
+    background-color: #0088cc;
+    color: white;
+}
+
+.share-btn.telegram:hover {
+    background-color: #0077b5;
+}
+
+.share-btn.vk {
+    background-color: #4C75A3;
+    color: white;
+}
+
+.share-btn.vk:hover {
+    background-color: #3B5998;
+}
+
+@media (max-width: 480px) {
+    .invite-content {
+        flex-direction: column;
+    }
+    
+    .qr-code-container {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .invite-info {
+        width: 100%;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+    }
+}
+
+/* Стили для списка всех пользователей */
+.all-users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.all-users-list .search-result-item {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.all-users-list .search-result-item:hover {
+    background-color: #f0f2f5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.all-users-list .search-result-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.all-users-list .search-result-info {
+    flex: 1;
+}
+
+.all-users-list .search-result-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.all-users-list .search-result-group {
+    font-size: 14px;
+    color: #666;
+}
+
+.all-users-list .add-friend-btn-small {
+    min-width: 90px;
+    text-align: center;
+} 

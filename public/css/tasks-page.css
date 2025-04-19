@@ -1,0 +1,701 @@
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.add-task-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.add-task-btn:hover {
+    background: #45a049;
+}
+
+.tasks-container {
+    display: flex;
+    gap: 20px;
+    height: calc(100vh - 140px);
+}
+
+.tasks-sidebar {
+    width: 300px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tasks-filters {
+    margin-bottom: 30px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.filter-btn {
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background: #f5f5f5;
+}
+
+.filter-btn.active {
+    background: #e8f5e9;
+    color: #4CAF50;
+    font-weight: 500;
+}
+
+.subjects-list {
+    margin-top: 20px;
+}
+
+.subject-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.checkbox.economics { background-color: rgba(76, 175, 80, 0.1); border: 1px solid #4CAF50; }
+.checkbox.physics { background-color: rgba(33, 150, 243, 0.1); border: 1px solid #2196F3; }
+.checkbox.math { background-color: rgba(156, 39, 176, 0.1); border: 1px solid #9C27B0; }
+.checkbox.english { background-color: rgba(255, 152, 0, 0.1); border: 1px solid #FF9800; }
+.checkbox.discrete-math { background-color: rgba(233, 30, 99, 0.1); border: 1px solid #E91E63; }
+
+.checkbox.checked .check-icon {
+    opacity: 1;
+}
+
+.check-icon {
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tasks-content {
+    flex-grow: 1;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.tasks-list {
+    margin-bottom: 20px;
+}
+
+.task-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-item {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.task-item.overdue {
+    border-left: 4px solid #dc3545;
+}
+
+.task-status {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #4CAF50;
+    background-color: rgba(76, 175, 80, 0.1);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.task-status:hover {
+    border-color: #4CAF50;
+}
+
+.task-status.completed {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.task-info {
+    flex-grow: 1;
+}
+
+.task-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #666;
+}
+
+.task-type {
+    background: #f0f0f0;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.task-deadline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.task-deadline img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+}
+
+.task-priority {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.priority-flag {
+    width: 16px;
+    height: 16px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.priority-high {
+    color: #FF4C4C;
+}
+
+.priority-high .priority-flag {
+    background-image: url('../img/icons/flag-red.svg');
+}
+
+.priority-medium {
+    color: #FFB800;
+}
+
+.priority-medium .priority-flag {
+    background-image: url('../img/icons/flag-yellow.svg');
+}
+
+.priority-low {
+    color: #2196F3;
+}
+
+.priority-low .priority-flag {
+    background-image: url('../img/icons/flag-blue.svg');
+}
+
+.task-subject {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.task-subject.economics { background-color: rgba(76, 175, 80, 0.1); color: #4CAF50; }
+.task-subject.physics { background-color: rgba(33, 150, 243, 0.1); color: #2196F3; }
+.task-subject.math { background-color: rgba(156, 39, 176, 0.1); color: #9C27B0; }
+.task-subject.english { background-color: rgba(255, 152, 0, 0.1); color: #FF9800; }
+.task-subject.discrete-math { background-color: rgba(233, 30, 99, 0.1); color: #E91E63; }
+
+/* Модальное окно */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-container {
+    background: white;
+    border-radius: 15px;
+    width: 500px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.btn-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #45a049;
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+.subject-group {
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.subject-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #eee;
+}
+
+.subject-header:hover {
+    background-color: #f8f9fa;
+}
+
+.subject-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.subject-toggle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.subject-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.subject-tasks {
+    max-height: 1000px;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+    padding: 15px;
+    padding-top: 0;
+}
+
+.subject-tasks.collapsed {
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.archive-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.archive-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+
+.archive-header h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #666;
+}
+
+.archive-toggle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.archive-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.archive-tasks {
+    max-height: 1000px;
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.archive-tasks.collapsed {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.add-task-form {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin: 15px 0;
+}
+
+.task-form-content {
+    padding: 24px 24px 16px;
+}
+
+.task-form-header {
+    background: #4051B5;
+    color: white;
+    padding: 14px 24px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.task-form-header img {
+    width: 20px;
+    height: 20px;
+}
+
+.task-title-input {
+    width: 100%;
+    border: none;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    padding: 0;
+    color: #444;
+}
+
+.task-title-input:focus {
+    outline: none;
+}
+
+.task-title-input::placeholder {
+    color: #777;
+}
+
+.task-description-input {
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    min-height: 40px;
+    margin-bottom: 20px;
+    padding: 0;
+    resize: none;
+    color: #666;
+}
+
+.task-description-input:focus {
+    outline: none;
+}
+
+.task-description-input::placeholder {
+    color: #999;
+}
+
+.task-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.task-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background: #F5F5F5;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.task-option:hover {
+    background: #ECECEC;
+}
+
+.task-option img {
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+.task-option span {
+    color: #666;
+    font-size: 16px;
+}
+
+.task-option.selected {
+    background: #E8F5E9;
+}
+
+/* Стили для выбора срока */
+.deadline-picker {
+    position: absolute;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    margin-top: 5px;
+    width: 250px;
+}
+
+.deadline-picker input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.picker-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.btn-cancel-deadline, .btn-set-deadline {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-cancel-deadline {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.btn-set-deadline {
+    background: #4051B5;
+    color: white;
+}
+
+/* Стили для выбора типа */
+.type-picker {
+    position: absolute;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    margin-top: 5px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.type-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.type-item:hover {
+    background: #f5f5f5;
+}
+
+/* Стили для выбора приоритета */
+.priority-picker {
+    position: absolute;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+    margin-top: 5px;
+    width: 200px;
+    overflow: hidden;
+}
+
+.priority-item {
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.priority-item:hover {
+    background: #f5f5f5;
+}
+
+.priority-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.task-form-buttons {
+    display: none;
+}
+
+.btn-cancel {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: #f5f5f5;
+}
+
+.btn-add-task {
+    background: #4051B5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-add-task:hover {
+    background: #364497;
+} 

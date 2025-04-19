@@ -17,6 +17,7 @@ public class UserDto {
     @NotBlank
     String givenName;
 
+
     @NotBlank
     String familyName;
 

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,7 +22,7 @@ public class UserDto {
 
     @NotBlank
     String login;
-    String[] friends; // login list
-    Integer[] activeTasks; // id of tasks
-    Integer[] finishedTasks;
+    Set<String> friends; // login list
+    List<Integer> activeTasks; // id of tasks
+    List<Integer> finishedTasks;
 }

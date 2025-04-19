@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Table(name = "tasks")
 @Entity
@@ -36,9 +37,9 @@ public class Task {
     @Column(nullable = false)
     private TypeOfTask typeOfTask;
 
-    private boolean started;
+    private Date started;
 
-    private boolean finished;
+    private Date finished;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

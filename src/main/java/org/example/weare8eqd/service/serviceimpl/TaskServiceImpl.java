@@ -34,8 +34,8 @@ public class TaskServiceImpl implements TaskService {
         dto.setPriority(task.getPriority());
         dto.setTypeOfTask(task.getTypeOfTask());
         dto.setDeadline(toDate(task.getDeadline()));
-        dto.setStarted(task.isStarted() ? toDate(task.getDeadline()) : null); // Example logic
-        dto.setFinished(task.isFinished() ? toDate(task.getDeadline()) : null); // Example logic
+        dto.setStarted(toDate(task.getDeadline()));
+        dto.setFinished(toDate(task.getDeadline()));
         dto.setUserId(task.getUser().getUserId());
         return dto;
     }
@@ -48,8 +48,8 @@ public class TaskServiceImpl implements TaskService {
                 .priority(dto.getPriority())
                 .typeOfTask(dto.getTypeOfTask())
                 .deadline(toLocalDateTime(dto.getDeadline()))
-                .started(dto.getStarted() != null)
-                .finished(dto.getFinished() != null)
+                .started(dto.getStarted())
+                .finished(dto.getFinished())
                 .user(user)
                 .build();
     }
@@ -81,20 +81,42 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public boolean updateTask(Integer taskId, UpdateTaskDto request) {
-//        Optional<Task> taskOpt = taskRepository.findById(taskId);
-//        if (taskOpt.isEmpty()) return false;
-//        Task task = taskOpt.get();
-//        task.setSubject(request.getSubject());
-//        task.setTitle(request.getTitle());
-//        task.setDescription(request.getDescription());
-//        task.setPriority(request.getPriority());
-//        task.setTypeOfTask(request.getTypeOfTask());
-//        task.setDeadline(toLocalDateTime(request.getDeadline()));
-//        task.setStarted(request.getStarted() != null);
-//        task.setFinished(request.getFinished() != null);
-//        taskRepository.save(task);
+        Optional<Task> taskOpt = taskRepository.findById(taskId);
+        if (taskOpt.isEmpty()) return false;
+        Task task = taskOpt.get();
+
+        if (request.getSubject() != null) {
+            task.setSubject(request.getSubject());
+        }
+        if (request.getTitle() != null) {
+            task.setTitle(request.getTitle());
+        }
+        if (request.getDescription() != null) {
+            task.setDescription(request.getDescription());
+        }
+        if (request.getPriority() != null) {
+            task.setPriority(request.getPriority());
+        }
+        if (request.getTypeOfTask() != null) {
+            task.setTypeOfTask(request.getTypeOfTask());
+        }
+        if (request.getDeadline() != null) {
+            task.setDeadline(toLocalDateTime(request.getDeadline()));
+        }
+        if (request.getStarted() != null) {
+            task.setStarted(request.getStarted());
+        }
+        if (request.getFinished() != null) {
+            task.setFinished(request.getStarted());
+        }
+        if (request.getUserId() != null) {
+            Optional<User> userOpt = userRepository.findById(request.getUserId());
+            userOpt.ifPresent(task::setUser);
+        }
+        taskRepository.save(task);
         return true;
     }
+
 
     @Override
     public List<TaskDto> getTaskByUser(Integer userId) {
@@ -122,7 +144,4 @@ public class TaskServiceImpl implements TaskService {
         Page<Task> tasksPage = taskRepository.findAllByUser(user, (Pageable) PageRequest.of(page, size));
         return tasksPage.map(this::toDto);
     }
-
-
-
 }

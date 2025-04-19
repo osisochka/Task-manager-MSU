@@ -54,14 +54,6 @@ public class TaskServiceImpl implements TaskService {
                 .build();
     }
 
-    private LocalDateTime toLocalDateTime(Date date) {
-        return date == null ? null : date.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDateTime();
-    }
-
-    private Date toDate(LocalDateTime ldt) {
-        return ldt == null ? null : java.util.Date.from(ldt.atZone(java.time.ZoneId.systemDefault()).toInstant());
-    }
-
 
     @Override
     public TaskDto getTaskById(Integer taskId) {

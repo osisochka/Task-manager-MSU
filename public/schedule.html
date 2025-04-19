@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таймер</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/timer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/MSU_2 2.svg" alt="МГУ" class="logo-img">
+            </div>
+            <a href="index.html" class="menu-item">
+                <img src="img/icons/iconoir_home-simple.svg" alt="Home">
+            </a>
+            <a href="calendar.html" class="menu-item">
+                <img src="img/icons/iconoir_calendar.svg" alt="Calendar">
+            </a>
+            <a href="tasks.html" class="menu-item">
+                <img src="img/icons/iconoir_task-list.svg" alt="Tasks">
+            </a>
+            <a href="schedule.html" class="menu-item active">
+                <img src="img/icons/iconoir_timer.svg" alt="Schedule">
+            </a>
+            <a href="profile.html" class="menu-item">
+                <img src="img/icons/iconoir_user.svg" alt="Profile">
+            </a>
+        </aside>
+
+        <main class="content">
+            <div class="timer-container">
+                <div class="timer-presets">
+                    <div class="preset active">Помо</div>
+                    <div class="preset">Секундомер</div>
+                    <div class="preset">52/17</div>
+                    <div class="preset">90</div>
+                    <div class="preset">+</div>
+                    <div class="preset">•••</div>
+                </div>
+
+                <div class="timer-main">
+                    <div class="timer-circle">
+                        <div class="timer-display">15:00</div>
+                    </div>
+                    <div class="timer-controls">
+                        <button class="timer-button">Начать</button>
+                        <button class="timer-button stop">Стоп</button>
+                    </div>
+                </div>
+
+                <div class="timer-stats">
+                    <div class="stat-item">
+                        <div class="stat-label">Помо на сегодня</div>
+                        <div class="stat-value">3</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Сосредоточенность на сегодня</div>
+                        <div class="stat-value">10 минут</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Помо всего</div>
+                        <div class="stat-value">30</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Общая продолжительность</div>
+                        <div class="stat-value">1 ч 23 мин</div>
+                    </div>
+                </div>
+
+                <div class="timer-logs">
+                    <h2>Записи фокусов</h2>
+                    <div class="log-date-group">
+                        <h3>27 февраля</h3>
+                        <div class="log-item">
+                            <div class="log-icon pomodoro"></div>
+                            <div class="log-time">12.00 - 12.30</div>
+                            <div class="log-duration">30 минут</div>
+                        </div>
+                        <div class="log-item">
+                            <div class="log-icon stopwatch"></div>
+                            <div class="log-time">11.50 - 12.00</div>
+                            <div class="log-duration">10 минут</div>
+                        </div>
+                        <div class="log-item">
+                            <div class="log-icon pomodoro"></div>
+                            <div class="log-time">10.50 - 11.50</div>
+                            <div class="log-duration">1 час</div>
+                        </div>
+                    </div>
+
+                    <div class="log-date-group">
+                        <h3>7 февраля</h3>
+                        <div class="log-item">
+                            <div class="log-icon pomodoro"></div>
+                            <div class="log-time">12.00 - 12.30</div>
+                            <div class="log-duration">30 минут</div>
+                        </div>
+                    </div>
+
+                    <div class="log-date-group">
+                        <h3>1 февраля</h3>
+                        <div class="log-item">
+                            <div class="log-icon pomodoro"></div>
+                            <div class="log-time">12.00 - 12.30</div>
+                            <div class="log-duration">30 минут</div>
+                        </div>
+                    </div>
+
+                    <div class="log-date-group">
+                        <h3>1 Января</h3>
+                        <div class="log-item">
+                            <div class="log-icon pomodoro"></div>
+                            <div class="log-time">12.00 - 12.30</div>
+                            <div class="log-duration">30 минут</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="notification"></div>
+    <script src="js/timer.js"></script>
+</body>
+</html> 

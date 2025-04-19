@@ -1,0 +1,65 @@
+.subject-group {
+    margin-bottom: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subject-header {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.subject-header:hover {
+    background-color: #f8f9fa;
+}
+
+.toggle-arrow {
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-arrow.collapsed {
+    transform: rotate(-90deg);
+}
+
+.subject-tasks {
+    padding: 15px;
+}
+
+.archive-section {
+    margin-top: 30px;
+}
+
+.archive-header {
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.archive-header:hover {
+    background: #e9ecef;
+}
+
+.archive-toggle {
+    margin-right: 10px;
+    transition: transform 0.2s ease;
+}
+
+.archive-toggle.collapsed {
+    transform: rotate(-90deg);
+}
+
+.archive-tasks {
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} 

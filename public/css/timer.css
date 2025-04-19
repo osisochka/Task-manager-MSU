@@ -1,0 +1,284 @@
+.content {
+    padding: 2rem;
+    width: 100%;
+    background-color: #F8F9FD;
+    min-height: 100vh;
+}
+
+.timer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.timer-presets {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+}
+
+.preset {
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.preset.active {
+    color: #4460F1;
+    background-color: rgba(68, 96, 241, 0.1);
+}
+
+.timer-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4rem;
+}
+
+.timer-circle {
+    width: 400px;
+    height: 400px;
+    border: 2px solid #E5E7EB;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.timer-display {
+    font-size: 6rem;
+    font-weight: 700;
+    color: #111;
+    font-family: 'Roboto', sans-serif;
+}
+
+.timer-button {
+    background-color: #4460F1;
+    color: white;
+    border: none;
+    padding: 1rem 4rem;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.timer-button:hover {
+    background-color: #3651D3;
+}
+
+.timer-button.stop {
+    background-color: #DC3545;
+}
+
+.timer-button.stop:hover {
+    background-color: #C82333;
+}
+
+.timer-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.stat-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    color: #111;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.timer-logs {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timer-logs h2 {
+    font-size: 1.5rem;
+    color: #111;
+    margin-bottom: 2rem;
+}
+
+.log-date-group {
+    margin-bottom: 2rem;
+}
+
+.log-date-group h3 {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.log-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.log-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.log-icon.pomodoro {
+    background-color: rgba(68, 96, 241, 0.1);
+    position: relative;
+}
+
+.log-icon.pomodoro::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #4460F1;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.log-icon.stopwatch {
+    background-color: rgba(255, 193, 7, 0.1);
+    position: relative;
+}
+
+.log-icon.stopwatch::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #FFC107;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.log-time {
+    color: #111;
+    font-weight: 500;
+}
+
+.log-duration {
+    color: #666;
+    margin-left: auto;
+}
+
+.timer-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.timer-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timer-btn.start {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.timer-btn.pause {
+    background-color: #FFC107;
+    color: #333;
+}
+
+.timer-btn.reset {
+    background-color: #f44336;
+    color: white;
+}
+
+.timer-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.timer-settings {
+    margin-top: 2rem;
+}
+
+.timer-settings h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.time-input {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.time-input input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.time-input label {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    text-align: center;
+    margin-top: 0.25rem;
+}
+
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem;
+    background: #333;
+    color: white;
+    border-radius: 8px;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+} 

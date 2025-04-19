@@ -1,0 +1,214 @@
+/* Стили для страницы входа */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #7DD3E9 0%, #4F46E5 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.login-box {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+.login-header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: #ffffff;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.login-header .logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+}
+
+.login-header h1 {
+    margin: 0;
+    color: #1a1f3d;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.login-header p {
+    margin: 10px 0 0;
+    color: #666;
+    font-size: 16px;
+}
+
+.profile-selection {
+    padding: 30px 40px 40px;
+}
+
+.profile-selection h2 {
+    margin: 0 0 30px;
+    color: #1a1f3d;
+    font-size: 22px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.profiles {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.profile-card {
+    width: 100%;
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card.selected {
+    border-color: #6366F1;
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.profile-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+    border: 3px solid white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info {
+    text-align: center;
+}
+
+.profile-info h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a1f3d;
+}
+
+.profile-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-group input:focus {
+    border-color: #6366F1;
+    outline: none;
+}
+
+#login-btn {
+    width: 100%;
+    padding: 14px;
+    background: #6366F1;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+
+#login-btn:hover:not(:disabled) {
+    background: #4F46E5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+#login-btn:disabled {
+    background: #b4b6f1;
+    cursor: not-allowed;
+}
+
+.login-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.login-links a {
+    color: #6366F1;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.login-links a:hover {
+    color: #4F46E5;
+    text-decoration: underline;
+}
+
+@media (max-width: 500px) {
+    .login-box {
+        border-radius: 16px;
+    }
+    
+    .profile-selection {
+        padding: 20px;
+    }
+    
+    .profile-avatar {
+        width: 70px;
+        height: 70px;
+    }
+} 

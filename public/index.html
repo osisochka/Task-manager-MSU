@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Студенческий Дашборд</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script>
+        // Проверяем, вошел ли пользователь в систему
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUserId = localStorage.getItem('currentUserId');
+            
+            // Если пользователь не вошел, перенаправляем на страницу входа
+            if (!currentUserId) {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="img/MSU_2 2.svg" alt="МГУ" class="logo-img">
+        </div>
+        <a href="index.html" class="menu-item active">
+            <img src="img/icons/iconoir_home-simple.svg" alt="Home">
+        </a>
+        <a href="calendar.html" class="menu-item">
+            <img src="img/icons/iconoir_calendar.svg" alt="Calendar">
+        </a>
+        <a href="tasks.html" class="menu-item">
+            <img src="img/icons/iconoir_task-list.svg" alt="Tasks">
+        </a>
+        <a href="schedule.html" class="menu-item">
+            <img src="img/icons/iconoir_timer.svg" alt="Schedule">
+        </a>
+        <a href="profile.html" class="menu-item">
+            <img src="img/icons/iconoir_user.svg" alt="Profile">
+        </a>
+    </aside>
+
+    <main class="content">
+        <section class="search-section">
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <span class="material-icons">search</span>
+            </div>
+        </section>
+
+        <div class="dashboard-grid">
+            <!-- Homework section -->
+            <section class="tasks-card">
+                <div class="card-header">
+                    <h2>Домашнее задание</h2>
+                    <a href="#" class="view-all">Посмотреть все</a>
+                </div>
+
+                <div class="task-list">
+                    <div class="task-item">
+                        <div class="status-circle status-overdue"></div>
+                        <div class="task-info">
+                            <h3>Домашнее задание</h3>
+                            <p>Вчера</p>
+                        </div>
+                        <div class="task-subject">Экономика</div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="status-circle status-pending"></div>
+                        <div class="task-info">
+                            <h3>Домашнее задание</h3>
+                            <p>Через 4 дня в 22:00</p>
+                        </div>
+                        <div class="task-subject">Математика</div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="status-circle status-pending"></div>
+                        <div class="task-info">
+                            <h3>Лабораторная работа</h3>
+                            <p>Через 2 дня в 21:00</p>
+                        </div>
+                        <div class="task-subject">Русский язык</div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="status-circle status-pending"></div>
+                        <div class="task-info">
+                            <h3>Лабораторная работа</h3>
+                            <p>Через 2 дня в 21:00</p>
+                        </div>
+                        <div class="task-subject">Русский язык</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Clock and Calendar Section -->
+            <section class="clock-calendar-section">
+                <div class="clock-card">
+                    <div class="clock">
+                        <div class="analog-clock">
+                            <div class="hour-numbers">
+                                <div class="number">12</div>
+                                <div class="number">1</div>
+                                <div class="number">2</div>
+                                <div class="number">3</div>
+                                <div class="number">4</div>
+                                <div class="number">5</div>
+                                <div class="number">6</div>
+                                <div class="number">7</div>
+                                <div class="number">8</div>
+                                <div class="number">9</div>
+                                <div class="number">10</div>
+                                <div class="number">11</div>
+                            </div>
+                            <div class="hour-hand"></div>
+                            <div class="minute-hand"></div>
+                            <div class="second-hand"></div>
+                            <div class="center-dot"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar-card">
+                    <div class="calendar-header">
+                        <div class="calendar-title">
+                            <div class="calendar-icon">
+                                <span class="material-icons">calendar_today</span>
+                            </div>
+                            <div>
+                                <h2>Календарь</h2>
+                                <div class="current-date">
+                                    <p>Сегодня</p>
+                                    <h3>Суббота, 19 Апреля 2025</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="view-all">Посмотреть все</a>
+                    </div>
+
+                    <div class="weekdays">
+                        <div class="day">
+                            <span class="day-name">Пн</span>
+                            <span class="day-number">14</span>
+                        </div>
+                        <div class="day">
+                            <span class="day-name">Вт</span>
+                            <span class="day-number">15</span>
+                        </div>
+                        <div class="day">
+                            <span class="day-name">Ср</span>
+                            <span class="day-number">16</span>
+                        </div>
+                        <div class="day">
+                            <span class="day-name">Чт</span>
+                            <span class="day-number">17</span>
+                        </div>
+                        <div class="day">
+                            <span class="day-name">Пт</span>
+                            <span class="day-number">18</span>
+                        </div>
+                        <div class="day active">
+                            <span class="day-name">Сб</span>
+                            <span class="day-number">19</span>
+                        </div>
+                        <div class="day">
+                            <span class="day-name">Вс</span>
+                            <span class="day-number">20</span>
+                        </div>
+                    </div>
+
+                    <div class="schedule">
+                        <div class="schedule-item">
+                            <div class="time">8:00</div>
+                            <div class="time-line"></div>
+                            <div class="class">
+                                <h4>Математика</h4>
+                                <p>Кабинет 405</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="time">9:30</div>
+                            <div class="time-line"></div>
+                            <div class="class">
+                                <h4>Физика</h4>
+                                <p>Кабинет 308</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="time">11:20</div>
+                            <div class="time-line"></div>
+                            <div class="class">
+                                <h4>Информатика</h4>
+                                <p>Кабинет 207</p>
+                            </div>
+                        </div>
+                        <div class="schedule-item">
+                            <div class="time">12:20</div>
+                            <div class="time-line"></div>
+                            <div class="class">
+                                <h4>Английский язык</h4>
+                                <p>Кабинет 402</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Friends section -->
+            <section class="friends-card">
+                <div class="card-header">
+                    <h2>Друзья</h2>
+                </div>
+
+                <div class="friends-list">
+                    <div class="friend-item">
+                        <div class="friend-avatar">ИП</div>
+                        <div class="friend-details">
+                            <h3>Иван Петров</h3>
+                            <p>Группа 103</p>
+                        </div>
+                    </div>
+
+                    <div class="friend-item">
+                        <div class="friend-avatar">ЛП</div>
+                        <div class="friend-details">
+                            <h3>Леша Петов</h3>
+                            <p>Группа 102</p>
+                        </div>
+                    </div>
+
+                    <div class="friend-item">
+                        <div class="friend-avatar">ИС</div>
+                        <div class="friend-details">
+                            <h3>Игорь Странцув</h3>
+                            <p>Группа 103</p>
+                        </div>
+                    </div>
+
+                    <button class="see-all-btn">See all</button>
+                </div>
+            </section>
+
+            <!-- Task tracker section -->
+            <section class="tracker-card">
+                <div class="card-header">
+                    <h2>Трекер задач</h2>
+                </div>
+
+                <div class="tracker-chart">
+                    <canvas id="taskChart"></canvas>
+                    <div class="chart-days">
+                        <span>Monday</span>
+                        <span>Tuesday</span>
+                        <span>Wednesday</span>
+                        <span>Thursday</span>
+                        <span>Friday</span>
+                        <span>Saturday</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/main.js"></script>
+
+<style>
+.tasks-card, .clock-card, .calendar-card, .friends-card, .tracker-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+</body>
+</html>

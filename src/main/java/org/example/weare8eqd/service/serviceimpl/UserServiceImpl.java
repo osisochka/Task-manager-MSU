@@ -9,10 +9,12 @@ import org.example.weare8eqd.dto.UserDto;
 import org.example.weare8eqd.repository.UserRepository;
 import org.example.weare8eqd.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 
@@ -64,9 +66,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(Long userId, UpdateUserDto updateUserDto) {
         return userRepository.findById(userId.intValue()).map(user -> {
-            user.setGivenName(updateUserDto.getGivenName());
-            user.setFamilyName(updateUserDto.getFamilyName());
-            // loginы разные у всех
+            if (updateUserDto.getGivenName() != null) user.setGivenName(updateUserDto.getGivenName());
+            if (updateUserDto.getFamilyName() != null) user.setFamilyName(updateUserDto.getFamilyName());
             userRepository.save(user);
             return true;
         }).orElse(false);

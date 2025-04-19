@@ -1,9 +1,32 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  backend:
+    build: .
+    container_name: backend
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      DATABASE_URL: ${DATABASE_URL}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
-      - '5432'
+      - "${BACKEND_PORT}:8080"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: taskmanager
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "taskmanager", "-U", "${POSTGRES_USER}"]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:

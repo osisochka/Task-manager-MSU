@@ -1,5 +1,6 @@
 package org.example.weare8eqd.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 public class TaskDto {
     String subject;
+
+    @NotBlank
     String title;
     String description;
     Priority priority;
@@ -22,5 +25,7 @@ public class TaskDto {
     Date deadline;
     Date started;
     Date finished;
+
+    @NotBlank
     Integer userId;
 }

@@ -23,6 +23,5 @@ public class UserDto {
     @NotBlank
     String login;
     Set<String> friends; // login list
-    List<Integer> activeTasks; // id of tasks
-    List<Integer> finishedTasks;
+    List<Integer> tasks;
 }

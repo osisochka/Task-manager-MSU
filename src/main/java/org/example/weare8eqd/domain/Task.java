@@ -37,9 +37,9 @@ public class Task {
     @Column(nullable = false)
     private TypeOfTask typeOfTask;
 
-    private Date started;
+    private LocalDateTime started;
 
-    private Date finished;
+    private LocalDateTime finished;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

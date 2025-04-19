@@ -1,6 +1,5 @@
 package org.example.weare8eqd.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +8,7 @@ import org.example.weare8eqd.domain.Priority;
 import org.example.weare8eqd.domain.TypeOfTask;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Getter
 @Setter

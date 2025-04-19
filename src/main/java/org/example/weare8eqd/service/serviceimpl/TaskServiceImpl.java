@@ -33,9 +33,9 @@ public class TaskServiceImpl implements TaskService {
         dto.setDescription(task.getDescription());
         dto.setPriority(task.getPriority());
         dto.setTypeOfTask(task.getTypeOfTask());
-        dto.setDeadline(toDate(task.getDeadline()));
-        dto.setStarted(toDate(task.getDeadline()));
-        dto.setFinished(toDate(task.getDeadline()));
+        dto.setDeadline(task.getDeadline());
+        dto.setStarted(task.getDeadline());
+        dto.setFinished(task.getDeadline());
         dto.setUserId(task.getUser().getUserId());
         return dto;
     }
@@ -47,7 +47,7 @@ public class TaskServiceImpl implements TaskService {
                 .description(dto.getDescription())
                 .priority(dto.getPriority())
                 .typeOfTask(dto.getTypeOfTask())
-                .deadline(toLocalDateTime(dto.getDeadline()))
+                .deadline(dto.getDeadline())
                 .started(dto.getStarted())
                 .finished(dto.getFinished())
                 .user(user)
@@ -101,7 +101,7 @@ public class TaskServiceImpl implements TaskService {
             task.setTypeOfTask(request.getTypeOfTask());
         }
         if (request.getDeadline() != null) {
-            task.setDeadline(toLocalDateTime(request.getDeadline()));
+            task.setDeadline(request.getDeadline());
         }
         if (request.getStarted() != null) {
             task.setStarted(request.getStarted());

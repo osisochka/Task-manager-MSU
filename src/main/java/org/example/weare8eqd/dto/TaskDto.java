@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.example.weare8eqd.domain.Priority;
 import org.example.weare8eqd.domain.TypeOfTask;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -22,9 +23,9 @@ public class TaskDto {
     String description;
     Priority priority;
     TypeOfTask typeOfTask;
-    Date deadline;
-    Date started;
-    Date finished;
+    LocalDateTime deadline;
+    LocalDateTime started;
+    LocalDateTime finished;
 
     @NotBlank
     Integer userId;

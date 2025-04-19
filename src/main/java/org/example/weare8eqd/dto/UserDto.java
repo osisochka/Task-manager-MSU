@@ -12,7 +12,6 @@ import lombok.Setter;
 public class UserDto {
     String givenName;
     String familyName;
-    String middleName;
     String login;
     String[] friends; // login list
     Integer[] activeTasks; // id of tasks

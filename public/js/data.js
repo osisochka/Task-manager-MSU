@@ -5,7 +5,7 @@ const users = [
         name: "Игорь Алексеевич",
         group: "101 группа",
         avatar: "img/прф.png",
-        friends: 102,
+        friends: 101,
         experience: 1400,
         gender: "Мужской",
         birthday: "26 июня 1997",
@@ -18,7 +18,7 @@ const users = [
         name: "Игорь Санцув",
         group: "102 группа",
         avatar: "img/игр.png",
-        friends: 87,
+        friends: 86,
         experience: 1200,
         gender: "Мужской",
         birthday: "15 марта 1998",
@@ -70,12 +70,6 @@ const users = [
 // База данных друзей
 const friends = [
     {
-        id: 1,
-        userId: 1,
-        friendId: 2,
-        since: "2022-09-01"
-    },
-    {
         id: 2,
         userId: 1,
         friendId: 3,
@@ -92,12 +86,6 @@ const friends = [
         userId: 1,
         friendId: 5,
         since: "2022-11-05"
-    },
-    {
-        id: 5,
-        userId: 2,
-        friendId: 1,
-        since: "2022-09-01"
     },
     {
         id: 6,

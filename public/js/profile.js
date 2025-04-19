@@ -13,7 +13,8 @@ $(document).ready(function() {
     function initFriendButtons() {
         $('.find-friends').on('click', function(e) {
             e.preventDefault();
-            $('#friends-search-input').focus();
+            // Показываем всех пользователей из базы данных
+            showAllUsers();
         });
 
         $('.invite-friend').on('click', function(e) {
@@ -76,29 +77,62 @@ $(document).ready(function() {
         if(!window.activityChartInitialized) {
             const ctx = document.getElementById('activity-chart').getContext('2d');
             
-            // Генерируем случайные данные для демонстрации
-            const labels = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
-            const tasksData = Array.from({length: 7}, () => Math.floor(Math.random() * 10));
-            const studyData = Array.from({length: 7}, () => Math.floor(Math.random() * 8));
+            // Получаем ID пользователя профиля из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileUserId = parseInt(urlParams.get('id')) || 1;
+            
+            // ID текущего пользователя
+            const currentUserId = parseInt(localStorage.getItem('currentUserId')) || 1;
+            
+            // Проверяем, свой ли это профиль
+            const isOwnProfile = currentUserId === profileUserId;
+            
+            // Данные для графика
+            const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            
+            // Создаем разные данные для текущего пользователя и для друга
+            let primaryUserData, secondaryUserData;
+            let primaryUserLabel, secondaryUserLabel;
+            
+            if (isOwnProfile) {
+                // Для собственного профиля показываем задания и учебное время
+                primaryUserData = [160, 140, 180, 160, 180, 160];
+                secondaryUserData = [120, 160, 140, 170, 150, 140];
+                primaryUserLabel = 'Выполненные задания';
+                secondaryUserLabel = 'Учебное время';
+            } else {
+                // Для профиля друга - сравнение активности
+                const friend = getUserById(profileUserId);
+                primaryUserData = [160, 140, 180, 160, 170, 180];  // Данные для друга (синяя линия)
+                secondaryUserData = [140, 170, 150, 170, 140, 150]; // Данные текущего пользователя (фиолетовая линия)
+                primaryUserLabel = friend ? friend.name : 'Иван Игоревич';
+                secondaryUserLabel = 'Вы';
+            }
             
             const chart = new Chart(ctx, {
-                type: 'bar',
+                type: 'line',
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Выполненные задания',
-                            data: tasksData,
-                            backgroundColor: '#6366F1',
-                            borderColor: '#6366F1',
-                            borderWidth: 1
+                            label: primaryUserLabel,
+                            data: primaryUserData,
+                            fill: true,
+                            backgroundColor: 'rgba(37, 99, 235, 0.2)',
+                            borderColor: 'rgba(37, 99, 235, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointRadius: 0
                         },
                         {
-                            label: 'Учебное время (часы)',
-                            data: studyData,
-                            backgroundColor: '#22C55E',
-                            borderColor: '#22C55E',
-                            borderWidth: 1
+                            label: secondaryUserLabel,
+                            data: secondaryUserData,
+                            fill: true,
+                            backgroundColor: 'rgba(109, 40, 217, 0.2)',
+                            borderColor: 'rgba(109, 40, 217, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointRadius: 0
                         }
                     ]
                 },
@@ -107,13 +141,71 @@ $(document).ready(function() {
                     maintainAspectRatio: false,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            grid: {
+                                display: true,
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                stepSize: 80
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
                         }
                     }
                 }
             });
             
+            // Обновляем легенду
+            updateChartLegend(isOwnProfile);
+            
             window.activityChartInitialized = true;
+        }
+    }
+    
+    // Обновление легенды графика
+    function updateChartLegend(isOwnProfile) {
+        const chartLegend = document.querySelector('.chart-legend');
+        if (!chartLegend) return;
+        
+        if (isOwnProfile) {
+            // Для собственного профиля
+            chartLegend.innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color tasks"></div>
+                    <span>Выполненные задания</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color study"></div>
+                    <span>Учебное время</span>
+                </div>
+            `;
+        } else {
+            // Для профиля друга
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileUserId = parseInt(urlParams.get('id')) || 1;
+            const friend = getUserById(profileUserId);
+            const friendName = friend ? friend.name : 'Иван Игоревич';
+            
+            chartLegend.innerHTML = `
+                <div class="legend-item">
+                    <div class="legend-color friend"></div>
+                    <span>${friendName}</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color you"></div>
+                    <span>Вы</span>
+                </div>
+            `;
         }
     }
 
@@ -137,12 +229,19 @@ $(document).ready(function() {
             // Добавляем в массив друзей
             friends.push(newFriendship);
             
-            // Обновляем счетчик друзей у обоих пользователей
-            const user = getUserById(userId);
-            const friend = getUserById(friendId);
+            // Обновляем отображение на странице, если открыт профиль одного из пользователей
+            const urlParams = new URLSearchParams(window.location.search);
+            const profileUserId = parseInt(urlParams.get('id')) || parseInt(localStorage.getItem('currentUserId')) || 1;
             
-            if(user) user.friends += 1;
-            if(friend) friend.friends += 1;
+            if (profileUserId === userId || profileUserId === friendId) {
+                const profileUser = getUserById(profileUserId);
+                if (profileUser) {
+                    const newFriendsCount = friends.filter(f => 
+                        f.userId === profileUserId || f.friendId === profileUserId
+                    ).length;
+                    document.getElementById('friends-count').textContent = newFriendsCount;
+                }
+            }
             
             return true;
         }
@@ -230,6 +329,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const userFriends = getUserFriends(profileUserId);
     displayFriends(userFriends);
     
+    // Управляем видимостью вкладок
+    const chartTab = document.querySelector('.tab-btn[data-tab="chart"]');
+    const achievementsTab = document.querySelector('.tab-btn[data-tab="achievements"]');
+    const achievementsContent = document.querySelector('#achievements-tab');
+    const aboutTab = document.querySelector('.tab-btn[data-tab="about"]');
+    const aboutContent = document.querySelector('#about-tab');
+    
+    if (isOwnProfile) {
+        // Если это МОЙ профиль (я залогинен как Игорь), скрываем График
+        if (chartTab) {
+            chartTab.style.display = 'none';
+        }
+        
+        // Делаем активной вкладку Достижения
+        if (achievementsTab && achievementsContent) {
+            $('.tab-btn').removeClass('active');
+            $('.tab-content').removeClass('active');
+            achievementsTab.classList.add('active');
+            achievementsContent.classList.add('active');
+        }
+    } else {
+        // Если я зашел на профиль Игоря с другого аккаунта, показываем График
+        if (chartTab) {
+            chartTab.style.display = '';
+        }
+    }
+    
     // Обработчик для кнопки выхода
     document.querySelector('.logout-btn').addEventListener('click', function(e) {
         e.preventDefault();
@@ -247,7 +373,11 @@ function displayUserProfile(user) {
     document.getElementById('profile-avatar').src = user.avatar;
     document.getElementById('profile-name').textContent = user.name;
     document.getElementById('profile-group').textContent = user.group;
-    document.getElementById('friends-count').textContent = user.friends;
+    
+    // Подсчитываем реальное количество друзей пользователя из массива friends
+    const friendsCount = friends.filter(f => f.userId === user.id || f.friendId === user.id).length;
+    document.getElementById('friends-count').textContent = friendsCount;
+    
     document.getElementById('exp-count').textContent = user.experience;
     
     // Обновляем информацию в секции About
@@ -600,4 +730,125 @@ function copyInviteLink() {
     
     // Показываем уведомление о копировании
     showNotification('Ссылка скопирована!');
+}
+
+// Функция для отображения всех пользователей из базы данных
+function showAllUsers() {
+    // Получаем ID текущего пользователя
+    const currentUserId = parseInt(localStorage.getItem('currentUserId')) || 1;
+    
+    // Получаем все дружеские связи текущего пользователя
+    const userFriendships = friends.filter(f => 
+        f.userId === currentUserId || f.friendId === currentUserId
+    );
+    
+    // Получаем ID всех друзей
+    const friendIds = userFriendships.map(f => 
+        f.userId === currentUserId ? f.friendId : f.userId
+    );
+    
+    // Фильтруем пользователей, исключая текущего
+    const otherUsers = users.filter(user => user.id !== currentUserId);
+    
+    if (otherUsers.length === 0) {
+        showNotification('Нет других пользователей в системе');
+        return;
+    }
+    
+    // Создаем модальное окно для отображения всех пользователей
+    const modalHtml = `
+        <div class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3>Все пользователи (${otherUsers.length})</h3>
+                    <button class="modal-close">&times;</button>
+                </div>
+                <div class="modal-content">
+                    <div class="all-users-list">
+                        ${otherUsers.map(user => {
+                            // Проверяем, является ли пользователь другом
+                            const isFriend = friendIds.includes(user.id);
+                            
+                            // Проверяем, существует ли аватар
+                            let avatarUrl = user.avatar || 'img/default-avatar.png';
+                            
+                            // Определяем класс для кнопки
+                            const buttonClass = isFriend ? 'add-friend-btn-small added' : 'add-friend-btn-small';
+                            const buttonText = isFriend ? 'Друзья' : 'Добавить';
+                            const isDisabled = isFriend ? 'disabled' : '';
+                            
+                            return `
+                                <div class="search-result-item" data-userid="${user.id}">
+                                    <img src="${avatarUrl}" alt="${user.name}" onerror="this.src='img/default-avatar.png'">
+                                    <div class="search-result-info">
+                                        <div class="search-result-name">${user.name}</div>
+                                        <div class="search-result-group">${user.group}</div>
+                                    </div>
+                                    <div class="search-result-action">
+                                        <button class="${buttonClass}" data-userid="${user.id}" ${isDisabled}>${buttonText}</button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Добавляем модальное окно в DOM
+    const modalElement = $(modalHtml);
+    $('body').append(modalElement);
+    
+    // Предотвращаем прокрутку страницы
+    $('body').addClass('modal-open');
+    
+    // Обработчик закрытия модального окна
+    $('.modal-close, .modal-overlay').on('click', function(e) {
+        if (e.target === this) {
+            closeAllUsersModal();
+        }
+    });
+    
+    // Обработчик для кнопок добавления в друзья
+    $('.all-users-list').on('click', '.add-friend-btn-small:not(.added)', function(e) {
+        e.stopPropagation();
+        
+        const friendId = parseInt($(this).data('userid'));
+        
+        // Добавляем в друзья
+        if (addToFriends(currentUserId, friendId)) {
+            // Меняем текст и стиль кнопки
+            $(this).text('Друзья').addClass('added').attr('disabled', true);
+            
+            // Обновляем список друзей на странице
+            const userFriends = getUserFriends(currentUserId);
+            displayFriends(userFriends);
+            
+            // Показываем уведомление
+            showNotification('Пользователь добавлен в друзья');
+        }
+    });
+    
+    // Делегирование события для клика на пользователя
+    $('.all-users-list').on('click', '.search-result-item', function(e) {
+        if (!$(e.target).hasClass('add-friend-btn-small')) {
+            const userId = $(this).data('userid');
+            window.location.href = `profile.html?id=${userId}`;
+        }
+    });
+    
+    // Обработчик клавиши Escape
+    $(document).on('keydown.modal', function(e) {
+        if (e.key === 'Escape') {
+            closeAllUsersModal();
+        }
+    });
+}
+
+// Функция закрытия модального окна со всеми пользователями
+function closeAllUsersModal() {
+    $('.modal-overlay').remove();
+    $('body').removeClass('modal-open');
+    $(document).off('keydown.modal');
 } 

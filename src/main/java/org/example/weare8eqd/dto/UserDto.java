@@ -15,6 +15,6 @@ public class UserDto {
     String middleName;
     String login;
     String[] friends; // login list
-    int[] activeTasks; // id of tasks
-    int[] finishedTasks;
+    Integer[] activeTasks; // id of tasks
+    Integer[] finishedTasks;
 }

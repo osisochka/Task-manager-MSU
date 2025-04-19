@@ -1,9 +1,7 @@
 package org.example.weare8eqd.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Set;
@@ -13,6 +11,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Setter
+@Getter
 public class User {
 
     @Id
@@ -33,7 +33,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "taskId")
-    @Column(name = "user_tasks", nullable = false)
+    @Column(name = "user_tasks")
     private List<Task> tasks;
 
     @Transient

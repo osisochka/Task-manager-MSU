@@ -32,7 +32,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "taskId")
+    @OneToMany(mappedBy = "user")
     @Column(name = "user_tasks")
     private List<Task> tasks;
 

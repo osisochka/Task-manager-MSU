@@ -10,6 +10,7 @@ public interface TaskService {
     TaskDto getTaskById(Integer orderId);
 
     boolean createTask(TaskDto request);
+
     boolean updateTask(Integer taskId, TaskDto request);
 
     List<TaskDto> getTaskByUser(Integer userId);

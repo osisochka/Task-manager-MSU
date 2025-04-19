@@ -13,6 +13,7 @@ public class UserService {
         int[] activeTasks = userDTO.getActiveTasks();
         int[] finishedTasks = userDTO.getFinishedTasks();
         long id = 1;
+
         User newUser = new User(id, givenName, familyName, middleName, login, friends, activeTasks, finishedTasks);
     }
 }

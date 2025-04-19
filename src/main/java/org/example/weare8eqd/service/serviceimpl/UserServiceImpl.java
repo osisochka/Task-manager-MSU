@@ -1,19 +1,42 @@
 package org.example.weare8eqd.service.serviceimpl;
 
+
+import org.example.weare8eqd.dto.CreateUserDto;
+import org.example.weare8eqd.dto.UpdateUserDto;
+import org.example.weare8eqd.dto.UserDto;
+import org.example.weare8eqd.service.UserService;
+
 import java.util.List;
 
-public interface UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
-    CreatedDto addUser(CreateUserDto createUserDto);
+    @Override
+    public boolean addUser(CreateUserDto createUserDto) {
+        return false;
+    }
 
-    UserResponseDto getUser(Long userId);
+    @Override
+    public UserDto getUser(Long userId) {
+        return null;
+    }
 
-    UserResponseDto getUserByLogin(String login);
+    @Override
+    public UserDto getUserByLogin(String login) {
+        return null;
+    }
 
-    List<UserResponseDto> getAllUsers();
+    @Override
+    public List<UserDto> getAllUsers() {
+        return List.of();
+    }
 
-    UpdatedDto updateUser(Long userId, UpdateUserDto updateUserDto);
+    @Override
+    public boolean updateUser(Long userId, UpdateUserDto updateUserDto) {
+        return false;
+    }
 
-    DeletedDto deleteUser(Long userId);
-
+    @Override
+    public boolean deleteUser(Long userId) {
+        return false;
+    }
 }

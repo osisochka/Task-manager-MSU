@@ -39,3 +39,4 @@ out/
 .DS_Store
 .env
 pgdata/
+node_modules

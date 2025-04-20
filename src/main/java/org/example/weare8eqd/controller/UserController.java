@@ -14,15 +14,16 @@ import java.util.List;
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @CrossOrigin(
-        origins = {
-                "http://localhost:3000"
-        },
+        value = "http://localhost:3000",
+        origins = "http://localhost:3000",
         methods = {
                 RequestMethod.GET,
                 RequestMethod.POST,
                 RequestMethod.PUT,
+                RequestMethod.PATCH,
                 RequestMethod.DELETE
-        }
+        },
+        allowedHeaders = "*"
 )
 public class UserController {
 

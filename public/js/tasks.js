@@ -24,6 +24,28 @@ $(document).ready(function() {
         }
     }
 
+    // Функция для отправки задачи в API
+    async function saveTaskToAPI(task) {
+        try {
+            const res = await fetch('http://localhost:8080/api/tasks', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(task)
+            });
+
+            if (!res.ok) throw new Error('Ошибка при добавлении задачи в базу данных');
+
+            const savedTask = await res.json();
+            return savedTask; // Возвращаем сохраненную задачу с ID от сервера
+        } catch (error) {
+            showNotification('Ошибка при сохранении задачи', 'error');
+            console.error(error);
+            throw error;
+        }
+    }
+
     // Состояние сворачивания групп
     let collapsedGroups = {};
 
@@ -73,10 +95,10 @@ $(document).ready(function() {
             e.preventDefault();
             const subject = $(this).data('subject');
             const $taskForm = createAddTaskForm(subject);
-            
+
             // Удаляем другие открытые формы
             $('.add-task-form').remove();
-            
+
             // Вставляем форму после ссылки
             $(this).after($taskForm);
             $taskForm.find('.task-title-input').focus();
@@ -100,28 +122,35 @@ $(document).ready(function() {
         });
 
         // Обработчик добавления новой задачи
-        $(document).on('click', '.btn-add-task', function() {
+        $(document).on('click', '.btn-add-task', async function() {
             const $form = $(this).closest('.add-task-form');
             const subject = $form.data('subject');
             const title = $form.find('.task-title-input').val();
             const description = $form.find('.task-description-input').val();
-            
+
             if (title) {
                 const newTask = {
-                    id: nextTaskId++,
                     title: title,
                     description: description,
                     subject: subject,
-                    type: 'ДЗ',
+                    typeOfTask: 'ДЗ',
                     deadline: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
                     priority: 'medium',
-                    status: 'active'
+                    status: 'active',
+                    userid: 1
                 };
-                
-                tasksData.push(newTask);
-                updateTasksList();
-                $form.remove();
-                showNotification('Задача успешно добавлена');
+
+                try {
+                    const savedTask = await saveTaskToAPI(newTask);
+                    // Обновляем ID задачи, если сервер вернул другой
+                    newTask.id = savedTask.id || newTask.id;
+                    tasksData.push(newTask);
+                    updateTasksList();
+                    $form.remove();
+                    showNotification('Задача успешно добавлена');
+                } catch (error) {
+                    // Ошибка уже обработана в saveTaskToAPI
+                }
             }
         });
 
@@ -129,15 +158,15 @@ $(document).ready(function() {
         $('.archive-header').on('click', function() {
             const $archiveTasks = $('.archive-tasks');
             const $toggle = $(this).find('.archive-toggle');
-            
+
             $archiveTasks.slideToggle(200);
             $toggle.toggleClass('collapsed');
         });
-        
+
         // Обработчик клика по кнопке "Срок"
         $(document).on('click', '.task-option[data-type="deadline"]', function() {
             const $form = $(this).closest('.add-task-form');
-            
+
             // Создаем календарь для выбора даты, если его еще нет
             if (!$form.find('.deadline-picker').length) {
                 const $picker = $('<div>', {
@@ -165,12 +194,12 @@ $(document).ready(function() {
                         })
                     )
                 );
-                
+
                 // Устанавливаем минимальную дату - сегодня
                 const today = new Date();
                 const dateString = today.toISOString().split('T')[0];
                 $picker.find('.deadline-date').val(dateString);
-                
+
                 // Добавляем календарь после кнопки
                 $(this).after($picker);
             } else {
@@ -178,50 +207,50 @@ $(document).ready(function() {
                 $form.find('.deadline-picker').toggle();
             }
         });
-        
+
         // Отмена выбора срока
         $(document).on('click', '.btn-cancel-deadline', function() {
             $(this).closest('.deadline-picker').remove();
         });
-        
+
         // Установка срока
         $(document).on('click', '.btn-set-deadline', function() {
             const $picker = $(this).closest('.deadline-picker');
             const date = $picker.find('.deadline-date').val();
             const time = $picker.find('.deadline-time').val();
-            
+
             if (date) {
                 const $form = $(this).closest('.add-task-form');
                 $form.data('deadline', `${date}T${time}`);
-                
+
                 // Обновляем визуальное отображение кнопки
                 const deadlineDate = new Date(`${date}T${time}`);
                 const formattedDate = formatDeadline(deadlineDate);
-                
+
                 $form.find('.task-option[data-type="deadline"] span').text(formattedDate);
                 $form.find('.task-option[data-type="deadline"]').addClass('selected');
-                
+
                 $picker.remove();
             }
         });
-        
+
         // Обработчик клика по кнопке "Тип"
         $(document).on('click', '.task-option[data-type="type"]', function() {
             const $form = $(this).closest('.add-task-form');
-            
+
             // Создаем выпадающий список, если его еще нет
             if (!$form.find('.type-picker').length) {
                 const $picker = $('<div>', {
                     class: 'type-picker'
                 });
-                
+
                 const types = [
                     { value: 'ДЗ', name: 'Домашнее задание' },
                     { value: 'БДЗ', name: 'Большое ДЗ' },
                     { value: 'Л/Р', name: 'Лабораторная работа' },
                     { value: 'К/Р', name: 'Контрольная работа' }
                 ];
-                
+
                 types.forEach(type => {
                     $picker.append(
                         $('<div>', {
@@ -231,7 +260,7 @@ $(document).ready(function() {
                         })
                     );
                 });
-                
+
                 // Добавляем список после кнопки
                 $(this).after($picker);
             } else {
@@ -239,36 +268,36 @@ $(document).ready(function() {
                 $form.find('.type-picker').toggle();
             }
         });
-        
+
         // Выбор типа задачи
         $(document).on('click', '.type-item', function() {
             const $form = $(this).closest('.add-task-form');
             const typeValue = $(this).data('value');
             const typeName = $(this).text();
-            
+
             $form.data('type', typeValue);
             $form.find('.task-option[data-type="type"] span').text(typeValue);
             $form.find('.task-option[data-type="type"]').addClass('selected');
-            
+
             $(this).closest('.type-picker').remove();
         });
-        
+
         // Обработчик клика по кнопке "Приоритет"
         $(document).on('click', '.task-option[data-type="priority"]', function() {
             const $form = $(this).closest('.add-task-form');
-            
+
             // Создаем выпадающий список, если его еще нет
             if (!$form.find('.priority-picker').length) {
                 const $picker = $('<div>', {
                     class: 'priority-picker'
                 });
-                
+
                 const priorities = [
                     { value: 'high', name: 'Высокий', color: '#FF4C4C' },
                     { value: 'medium', name: 'Средний', color: '#FFB800' },
                     { value: 'low', name: 'Низкий', color: '#2196F3' }
                 ];
-                
+
                 priorities.forEach(priority => {
                     $picker.append(
                         $('<div>', {
@@ -284,7 +313,7 @@ $(document).ready(function() {
                         )
                     );
                 });
-                
+
                 // Добавляем список после кнопки
                 $(this).after($picker);
             } else {
@@ -292,34 +321,34 @@ $(document).ready(function() {
                 $form.find('.priority-picker').toggle();
             }
         });
-        
+
         // Выбор приоритета
         $(document).on('click', '.priority-item', function() {
             const $form = $(this).closest('.add-task-form');
             const priorityValue = $(this).data('value');
             const priorityName = $(this).find('span').text();
             const priorityColor = $(this).data('color');
-            
+
             $form.data('priority', priorityValue);
             $form.find('.task-option[data-type="priority"] span').text(priorityName);
             $form.find('.task-option[data-type="priority"]').addClass('selected');
             // Меняем иконку на цветную
             $form.find('.task-option[data-type="priority"] img').attr('src', `img/icons/flag-${priorityValue}.svg`);
-            
+
             $(this).closest('.priority-picker').remove();
         });
-        
+
         // Обработчик клика по заголовку формы - добавляем задачу
-        $(document).on('click', '.task-form-header', function() {
+        $(document).on('click', '.task-form-header', async function() {
             const $form = $(this).closest('.add-task-form');
             const title = $form.find('.task-title-input').val();
-            
+
             if (title) {
                 const subject = $form.data('subject');
                 const description = $form.find('.task-description-input').val();
                 const type = $form.data('type') || 'ДЗ';
                 const priority = $form.data('priority') || 'medium';
-                
+
                 let deadline = $form.data('deadline');
                 if (!deadline) {
                     // Если срок не выбран, устанавливаем на завтра
@@ -328,7 +357,7 @@ $(document).ready(function() {
                     tomorrow.setHours(23, 59, 0, 0);
                     deadline = tomorrow.toISOString();
                 }
-                
+
                 const newTask = {
                     id: nextTaskId++,
                     title: title,
@@ -339,11 +368,18 @@ $(document).ready(function() {
                     priority: priority,
                     status: 'active'
                 };
-                
-                tasksData.push(newTask);
-                updateTasksList();
-                $form.remove();
-                showNotification('Задача успешно добавлена');
+
+                try {
+                    const savedTask = await saveTaskToAPI(newTask);
+                    // Обновляем ID задачи, если сервер вернул другой
+                    newTask.id = savedTask.id || newTask.id;
+                    tasksData.push(newTask);
+                    updateTasksList();
+                    $form.remove();
+                    showNotification('Задача успешно добавлена');
+                } catch (error) {
+                    // Ошибка уже обработана в saveTaskToAPI
+                }
             } else {
                 // Если название не заполнено, показываем предупреждение
                 showNotification('Введите название задачи', 'error');
@@ -356,7 +392,7 @@ $(document).ready(function() {
         $('#addTaskModal').addClass('active');
     }
 
-    function addNewTask() {
+    async function addNewTask() {
         const newTask = {
             id: nextTaskId++,
             title: $('#taskTitle').val(),
@@ -368,17 +404,24 @@ $(document).ready(function() {
             status: 'active'
         };
 
-        tasksData.push(newTask);
-        
-        // Обновляем отображение
-        updateTasksList();
-        
-        // Закрываем модальное окно и очищаем форму
-        $('#addTaskModal').removeClass('active');
-        $('#addTaskForm')[0].reset();
-        
-        // Показываем уведомление
-        showNotification('Задача успешно добавлена');
+        try {
+            const savedTask = await saveTaskToAPI(newTask);
+            // Обновляем ID задачи, если сервер вернул другой
+            newTask.id = savedTask.id || newTask.id;
+            tasksData.push(newTask);
+
+            // Обновляем отображение
+            updateTasksList();
+
+            // Закрываем модальное окно и очищаем форму
+            $('#addTaskModal').removeClass('active');
+            $('#addTaskForm')[0].reset();
+
+            // Показываем уведомление
+            showNotification('Задача успешно добавлена');
+        } catch (error) {
+            // Ошибка уже обработана в saveTaskToAPI
+        }
     }
 
     function updateTasksList() {
@@ -529,9 +572,13 @@ $(document).ready(function() {
                         $('<span>', { text: 'Приоритет' })
                     )
                 )
-            ),
-            $('<div>', {
-                class: 'task-form-header'
+            ),$('<div>', {
+                class: 'task-form-header',
+                css: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                }
             }).append(
                 $('<img>', {
                     src: 'img/icons/msu-logo.svg',
@@ -541,6 +588,20 @@ $(document).ready(function() {
                 $('<span>', {
                     html: '&#9660;',
                     style: 'font-size: 12px'
+                }),
+                $('<div>', {
+                    class: 'add-task-label',
+                    text: 'Добавить',
+                    css: {
+                        marginLeft: 'auto',
+                        cursor: 'pointer',
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500'
+                    },
+                    click: function () {
+                        console.log('Добавление нового таска');
+                    }
                 })
             )
         );
@@ -560,7 +621,7 @@ $(document).ready(function() {
 
     function createTaskElement(task) {
         const deadline = new Date(task.deadline);
-        
+
         return $('<div>', {
             class: 'task-item',
             'data-id': task.id
@@ -612,10 +673,10 @@ $(document).ready(function() {
         const $group = $(`.subject-group[data-subject="${subject}"]`);
         const $tasks = $group.find('.subject-tasks');
         const $toggle = $group.find('.subject-toggle');
-        
+
         $tasks.toggleClass('collapsed');
         $toggle.toggleClass('collapsed');
-        
+
         collapsedGroups[subject] = $tasks.hasClass('collapsed');
     }
 
@@ -667,7 +728,7 @@ $(document).ready(function() {
 
     function showNotification(message, type = 'success') {
         const bgColor = type === 'success' ? '#4CAF50' : '#F44336';
-        
+
         const $notification = $('<div>', {
             class: 'notification',
             text: message
@@ -711,7 +772,7 @@ $(document).ready(function() {
             const $group = $(this).closest('.subject-group');
             const $arrow = $(this).find('.toggle-arrow');
             const $tasks = $group.find('.subject-tasks');
-            
+
             $tasks.slideToggle(200);
             $arrow.toggleClass('collapsed');
         });
@@ -721,7 +782,7 @@ $(document).ready(function() {
             const $archive = $(this).closest('.archive-section');
             const $arrow = $(this).find('.archive-toggle');
             const $tasks = $archive.find('.archive-tasks');
-            
+
             $tasks.slideToggle(200);
             $arrow.toggleClass('collapsed');
         });
@@ -730,7 +791,7 @@ $(document).ready(function() {
     function displayTasks() {
         const $activeTasksContainer = $('#activeTasks');
         const $archivedTasksContainer = $('#archivedTasks');
-        
+
         // Очищаем контейнеры
         $activeTasksContainer.empty();
         $archivedTasksContainer.empty();
@@ -748,11 +809,11 @@ $(document).ready(function() {
         Object.keys(activeTasksBySubject).forEach(subject => {
             const $subjectGroup = $(createSubjectGroup(subject, activeTasksBySubject[subject]));
             const $tasksContainer = $subjectGroup.find('.subject-tasks');
-            
+
             activeTasksBySubject[subject].forEach(task => {
                 $tasksContainer.append(createTaskElement(task));
             });
-            
+
             $activeTasksContainer.append($subjectGroup);
         });
 
@@ -766,4 +827,4 @@ $(document).ready(function() {
     loadTasks();
     initializeCollapsibleGroups();
     displayTasks();
-}); 
+});

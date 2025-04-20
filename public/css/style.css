@@ -17,11 +17,24 @@ body {
     display: flex;
     min-height: 100vh;
 }
+.menu-item.active::before {
+     content: '';
+     position: absolute;
+     left: 0;
+     top: 0;
+     width: 3px;
+     height: 100%;
+     background-color: white;
+ }
 
 /* Sidebar styles */
 .sidebar {
     width: var(--sidebar-width);
     background-color: #1a1f3d;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
     padding: 20px 0;
     display: flex;
     flex-direction: column;
@@ -105,6 +118,7 @@ body {
     flex: 1;
     padding: 20px;
     background-color: #f5f6f8;
+    margin-left: var(--sidebar-width);
 }
 
 /* Search bar styles */

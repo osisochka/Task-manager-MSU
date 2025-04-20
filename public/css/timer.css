@@ -31,6 +31,15 @@
     color: #4460F1;
     background-color: rgba(68, 96, 241, 0.1);
 }
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: white;
+}
 
 .timer-main {
     display: flex;

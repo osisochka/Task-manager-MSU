@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> createUser(
             @RequestBody @Valid CreateUserDto createUserDto) {
 
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<UserDto> getUser(
             @PathVariable Integer userId) {
 
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/login/{login}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<UserDto> getUserByLogin(
             @PathVariable String login) {
 
@@ -43,14 +43,14 @@ public class UserController {
     }
 
     @GetMapping
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{userId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> updateUser(
             @PathVariable Integer userId,
             @RequestBody @Valid UpdateUserDto updateUserDto) {
@@ -60,7 +60,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> deleteUser(
             @PathVariable Integer userId) {
 
@@ -69,7 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/share/{userId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> shareProgress(
             @PathVariable Integer userId,
             @RequestBody @Valid AddFriend login) {

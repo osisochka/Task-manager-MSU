@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль | Study Tracker</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/img/MSU.ico" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Навигация -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="img/MSU_2.svg" alt="МГУ">
+            </div>
+            <a href="index.html" class="menu-item">
+                <img src="img/icons/iconoir_home-simple.svg" alt="Home">
+            </a>
+            <a href="calendar.html" class="menu-item">
+                <img src="img/icons/iconoir_calendar.svg" alt="Calendar">
+            </a>
+            <a href="tasks.html" class="menu-item">
+                <img src="img/icons/iconoir_task-list.svg" alt="Tasks">
+            </a>
+            <a href="schedule.html" class="menu-item">
+                <img src="img/icons/iconoir_timer.svg" alt="Schedule">
+            </a>
+            <a href="profile.html" class="menu-item active">
+                <img src="img/icons/iconoir_user.svg" alt="Profile">
+            </a>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="content">
+            <!-- Шапка профиля -->
+            <div class="profile-header">
+                <div class="profile-cover">
+                    <div class="cloud cloud-1"></div>
+                    <div class="cloud cloud-2"></div>
+                    <div class="cloud cloud-3"></div>
+                    <img src="img/мгу.png" alt="МГУ" class="msu-building">
+                </div>
+                <button class="logout-btn">Выйти</button>
+                <div class="profile-info">
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar">
+                            <img src="img/прф.png" alt="Avatar" id="profile-avatar">
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="profile-top-section">
+                            <h1 id="profile-name">Иван Игоревич</h1>
+                        </div>
+                        <p class="group" id="profile-group">103 группа</p>
+                        <div class="profile-stats">
+                            <div class="stat-item friends">
+                                <span class="stat-value" id="friends-count">102</span>
+                                <span class="stat-label">Друга</span>
+                            </div>
+                            <div class="stat-item points">
+                                <span class="stat-value" id="exp-count">1400</span>
+                                <span class="stat-label">Опыта</span>
+                            </div>
+                        </div>
+                        <button class="add-friend-btn" id="add-friend-btn">В друзья</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент профиля -->
+            <div class="profile-content">
+                <div class="profile-main">
+                    <!-- Вкладки профиля -->
+                    <div class="profile-tabs">
+                        <button class="tab-btn active" data-tab="about">About</button>
+                        <button class="tab-btn" data-tab="achievements">Достижения</button>
+                        <button class="tab-btn" data-tab="chart">График</button>
+                    </div>
+
+                    <!-- About секция -->
+                    <section class="profile-section about tab-content active" id="about-tab">
+                        <h2>About</h2>
+                        <div class="about-info">
+                            <div class="info-item">
+                                <i class="icon gender"></i>
+                                <span>Male</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="icon birthday"></i>
+                                <span>Born June 26, 1980</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="icon location"></i>
+                                <span>2239 Hog Camp Road Schaumburg</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="icon email"></i>
+                                <span>charles5182@ummoh.com</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="icon phone"></i>
+                                <span>33757005467</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Секция достижений -->
+                    <section class="profile-section achievements tab-content" id="achievements-tab">
+                        <h2>Достижения</h2>
+                        <div class="achievement-list">
+                            <div class="achievement-item">
+                                <div class="achievement-icon deadline"></div>
+                                <div class="achievement-info">
+                                    <div class="achievement-header">
+                                        <span class="achievement-title">Мастер дедлайна</span>
+                                        <span class="achievement-progress">20/30</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 66%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon procrastinator"></div>
+                                <div class="achievement-info">
+                                    <div class="achievement-header">
+                                        <span class="achievement-title">Прокрастинатор джедай</span>
+                                        <span class="achievement-progress">4/5</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon excellent"></div>
+                                <div class="achievement-info">
+                                    <div class="achievement-header">
+                                        <span class="achievement-title">Синдром отличника</span>
+                                        <span class="achievement-progress">34/100</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 34%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon hardcore"></div>
+                                <div class="achievement-info">
+                                    <div class="achievement-header">
+                                        <span class="achievement-title">Хардкорщик</span>
+                                        <span class="achievement-progress">17/30</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 56%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="achievement-item">
+                                <div class="achievement-icon elephant"></div>
+                                <div class="achievement-info">
+                                    <div class="achievement-header">
+                                        <span class="achievement-title">Слон</span>
+                                        <span class="achievement-progress">20/1000</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 2%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Секция графика -->
+                    <section class="profile-section chart tab-content" id="chart-tab">
+                        <div class="chart-container">
+                            <canvas id="activity-chart"></canvas>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <div class="legend-color tasks"></div>
+                                    <span>Выполненные задания</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-color study"></div>
+                                    <span>Учебное время</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Боковая панель с друзьями -->
+                <aside class="profile-sidebar">
+                    <div class="friends-section">
+                        <div class="section-header">
+                            <h2>Друзья</h2>
+                            <a href="#" class="see-all">See all</a>
+                        </div>
+                        <div class="friends-list">
+                            <!-- Список друзей будет заполнен динамически -->
+                        </div>
+                        
+                        <div class="add-friends">
+                            <h3>Добавить друзей</h3>
+                            
+                            <div class="friends-search">
+                                <input type="text" id="friends-search-input" placeholder="Поиск пользователей...">
+                                <button id="friends-search-btn">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <path d="M21 21l-4.35-4.35"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="search-results">
+                                <!-- Результаты поиска будут здесь -->
+                            </div>
+                            
+                            <div class="find-friends-actions">
+                                <a href="#" class="find-friends" id="show-search-form">
+                                    <i class="icon search"></i>
+                                    Найти друзей
+                                </a>
+                                <a href="#" class="invite-friend" id="show-invite-qr">
+                                    <i class="icon invite"></i>
+                                    Пригласить друга
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <!-- Модальное окно для QR-кода приглашения -->
+    <div class="modal-overlay" id="invite-modal" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Пригласить друга</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-content">
+                <div class="invite-content">
+                    <div class="qr-code-container">
+                        <div id="qrcode"></div>
+                    </div>
+                    <div class="invite-info">
+                        <p>Отсканируйте QR-код или поделитесь ссылкой:</p>
+                        <div class="invite-link-container">
+                            <input type="text" id="invite-link" readonly>
+                            <button id="copy-link-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="share-buttons">
+                            <button class="share-btn telegram">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2.5 12a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"></path>
+                                    <path d="M7 10l5 3 5-3"></path>
+                                    <path d="M7 10l5 3 5-3"></path>
+                                </svg>
+                                Telegram
+                            </button>
+                            <button class="share-btn vk">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M18.7 5.5H5.3C4 5.5 3 6.6 3 7.9v8.2c0 1.3 1 2.4 2.3 2.4h13.4c1.3 0 2.3-1.1 2.3-2.4V7.9c0-1.3-1-2.4-2.3-2.4Z"></path>
+                                    <path d="M14.5 12L9.5 8.5v7l5-3.5z"></path>
+                                </svg>
+                                VK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/qrcode.min.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html> 

@@ -9,7 +9,15 @@
     gap: 20px;
     margin-bottom: 20px;
 }
-
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: white;
+}
 .create-btn {
     display: flex;
     align-items: center;

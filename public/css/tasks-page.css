@@ -608,6 +608,15 @@
     background: #f5f5f5;
     color: #666;
 }
+.menu-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: white;
+}
 
 .btn-set-deadline {
     background: #4051B5;

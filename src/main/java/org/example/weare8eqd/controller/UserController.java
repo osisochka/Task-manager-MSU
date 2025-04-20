@@ -18,6 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<String> createUser(
             @RequestBody @Valid CreateUserDto createUserDto) {
 
@@ -26,6 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
+    @CrossOrigin
     public ResponseEntity<UserDto> getUser(
             @PathVariable Integer userId) {
 
@@ -33,6 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/login/{login}")
+    @CrossOrigin
     public ResponseEntity<UserDto> getUserByLogin(
             @PathVariable String login) {
 
@@ -40,12 +43,14 @@ public class UserController {
     }
 
     @GetMapping
+    @CrossOrigin
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{userId}")
+    @CrossOrigin
     public ResponseEntity<String> updateUser(
             @PathVariable Integer userId,
             @RequestBody @Valid UpdateUserDto updateUserDto) {
@@ -55,6 +60,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
+    @CrossOrigin
     public ResponseEntity<String> deleteUser(
             @PathVariable Integer userId) {
 
@@ -63,6 +69,7 @@ public class UserController {
     }
 
     @PostMapping("/share/{userId}")
+    @CrossOrigin
     public ResponseEntity<String> shareProgress(
             @PathVariable Integer userId,
             @RequestBody @Valid AddFriend login) {

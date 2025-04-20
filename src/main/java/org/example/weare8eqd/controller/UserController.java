@@ -13,12 +13,22 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
+@CrossOrigin(
+        origins = {
+                "http://localhost:3000"
+        },
+        methods = {
+                RequestMethod.GET,
+                RequestMethod.POST,
+                RequestMethod.PUT,
+                RequestMethod.DELETE
+        }
+)
 public class UserController {
 
     private final UserService userService;
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> createUser(
             @RequestBody @Valid CreateUserDto createUserDto) {
 
@@ -27,7 +37,6 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<UserDto> getUser(
             @PathVariable Integer userId) {
 
@@ -35,7 +44,6 @@ public class UserController {
     }
 
     @GetMapping("/login/{login}")
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<UserDto> getUserByLogin(
             @PathVariable String login) {
 
@@ -43,14 +51,12 @@ public class UserController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<List<UserDto>> getAllUsers() {
 
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> updateUser(
             @PathVariable Integer userId,
             @RequestBody @Valid UpdateUserDto updateUserDto) {
@@ -60,7 +66,6 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> deleteUser(
             @PathVariable Integer userId) {
 
@@ -69,7 +74,6 @@ public class UserController {
     }
 
     @PostMapping("/share/{userId}")
-    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> shareProgress(
             @PathVariable Integer userId,
             @RequestBody @Valid AddFriend login) {

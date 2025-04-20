@@ -529,9 +529,13 @@ $(document).ready(function() {
                         $('<span>', { text: 'Приоритет' })
                     )
                 )
-            ),
-            $('<div>', {
-                class: 'task-form-header'
+            ),$('<div>', {
+                class: 'task-form-header',
+                css: {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px'
+                }
             }).append(
                 $('<img>', {
                     src: 'img/icons/msu-logo.svg',
@@ -541,8 +545,25 @@ $(document).ready(function() {
                 $('<span>', {
                     html: '&#9660;',
                     style: 'font-size: 12px'
+                }),
+                $('<div>', {
+                    class: 'add-task-label',
+                    text: 'Добавить',
+                    css: {
+                        marginLeft: 'auto',
+                        cursor: 'pointer',
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: '500'
+                    },
+                    click: function () {
+                        console.log('Добавление нового таска');
+                    }
                 })
             )
+
+
+
         );
     }
 

@@ -86,15 +86,6 @@ $(document).ready(function() {
             startTime: '11:00',
             endTime: '12:30'
         },
-        // Английский язык (фиолетовый)
-        {
-            type: 'english',
-            title: 'Английский язык',
-            location: 'Аудитория 103',
-            date: '2025-04-16',
-            startTime: '14:00',
-            endTime: '15:30'
-        },
         {
             type: 'english',
             title: 'Разговорная практика',

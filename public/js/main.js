@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+ document.addEventListener('DOMContentLoaded', function() {
     // Функция для форматирования числа с ведущим нулем
     function padZero(num) {
         return num < 10 ? `0${num}` : num;

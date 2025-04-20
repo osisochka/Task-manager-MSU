@@ -243,7 +243,7 @@ body {
 }
 
 .task-info p::before {
-    content: 'calendar_today';
+    content: '';
     font-family: 'Material Icons';
     font-size: 1.1em;
     color: #666;

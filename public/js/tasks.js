@@ -1,67 +1,28 @@
 $(document).ready(function() {
     // Данные о задачах
-    let tasksData = [
-        {
-            id: 1,
-            title: 'Домашнее задание',
-            subject: 'economics',
-            type: 'БДЗ',
-            deadline: '2025-04-20T22:00',
-            priority: 'high',
-            description: 'Подготовить презентацию по теме "Рыночная экономика"',
-            status: 'active'
-        },
-        {
-            id: 2,
-            title: 'Подготовка',
-            subject: 'economics',
-            type: 'ДЗ',
-            deadline: '2025-04-25T10:00',
-            priority: 'medium',
-            description: 'Подготовка к семинару',
-            status: 'active'
-        },
-        {
-            id: 3,
-            title: 'Лабораторная работа №1',
-            subject: 'physics',
-            type: 'Л/Р',
-            deadline: '2025-04-18T15:00',
-            priority: 'high',
-            description: 'Измерение ускорения свободного падения',
-            status: 'active'
-        },
-        {
-            id: 4,
-            title: 'Лабораторная работа №2',
-            subject: 'physics',
-            type: 'Л/Р',
-            deadline: '2025-05-25T10:00',
-            priority: 'medium',
-            description: 'Изучение законов динамики',
-            status: 'active'
-        },
-        {
-            id: 5,
-            title: 'Домашнее задание',
-            subject: 'physics',
-            type: 'БДЗ',
-            deadline: '2025-04-20T23:59',
-            priority: 'high',
-            description: 'Решение задач по динамике',
-            status: 'active'
-        },
-        {
-            id: 6,
-            title: 'Подготовка',
-            subject: 'physics',
-            type: 'ДЗ',
-            deadline: '2025-04-25T10:00',
-            priority: 'medium',
-            description: 'Подготовка к контрольной работе',
-            status: 'active'
+    let tasksData = [{
+        id: 1,
+        title: 'Домашнее задание',
+        subject: 'economics',
+        type: 'БДЗ',
+        deadline: '2025-04-20T22:00',
+        priority: 'high',
+        description: 'Подготовить презентацию по теме "Рыночная экономика"',
+        status: 'active'
+    }];
+
+    async function loadTasks() {
+        try {
+            const res = await fetch('http://localhost:8080/api/tasks');
+            if (!res.ok) throw new Error('Ошибка загрузки задач');
+
+            tasksData = await res.json();
+
+        } catch (error) {
+            document.getElementById('task-list').innerHTML = `<p style="color:red;">${error.message}</p>`;
+            console.error(error);
         }
-    ];
+    }
 
     // Состояние сворачивания групп
     let collapsedGroups = {};
@@ -116,6 +77,18 @@ $(document).ready(function() {
             // Удаляем другие открытые формы
             $('.add-task-form').remove();
             
+            // Вставляем форму после ссылки
+            $(this).after($taskForm);
+            $taskForm.find('.task-title-input').focus();
+        });
+        $(document).on('click', '.add-task-btn', function(e) {
+            e.preventDefault();
+            const subject = $(this).data('subject');
+            const $taskForm = createAddTaskForm(subject);
+
+            // Удаляем другие открытые формы
+            $('.add-task-form').remove();
+
             // Вставляем форму после ссылки
             $(this).after($taskForm);
             $taskForm.find('.task-title-input').focus();

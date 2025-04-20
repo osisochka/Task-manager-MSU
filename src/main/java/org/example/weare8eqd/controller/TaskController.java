@@ -18,7 +18,7 @@ public class TaskController {
     private final TaskService taskService;
 
     @PostMapping
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> createTask(
             @RequestBody @Valid TaskDto taskDto) {
 
@@ -27,7 +27,7 @@ public class TaskController {
     }
 
     @GetMapping("/{taskId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<TaskDto> getTask(
             @PathVariable Integer taskId) {
 
@@ -35,7 +35,7 @@ public class TaskController {
     }
 
     @GetMapping("/user/{userId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<List<TaskDto>> getTasksByUser(
             @PathVariable Integer userId) {
 
@@ -43,7 +43,7 @@ public class TaskController {
     }
 
     @PutMapping("/{taskId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> updateTask(
             @PathVariable Integer taskId,
             @RequestBody @Valid UpdateTaskDto updateTaskDto) {
@@ -53,7 +53,7 @@ public class TaskController {
     }
 
     @DeleteMapping("/{taskId}")
-    @CrossOrigin
+    @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity<String> deleteTask(
             @PathVariable Integer taskId) {
 

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Table(name = "tasks")
 @Entity
@@ -32,9 +31,11 @@ public class Task {
     private String subject;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Priority priority;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TypeOfTask typeOfTask;
 
     private LocalDateTime started;

@@ -1,8 +1,7 @@
 package org.example.weare8eqd.domain;
 
 public enum Priority {
-    LOW,
+    HIGH,
     MEDIUM,
-    HIGH
+    LOW
 }
-

@@ -22,6 +22,9 @@ services:
       POSTGRES_DB: taskmanager
     ports:
       - "${POSTGRES_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgres/initdb:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "taskmanager", "-U", "${POSTGRES_USER}"]
       interval: 1s

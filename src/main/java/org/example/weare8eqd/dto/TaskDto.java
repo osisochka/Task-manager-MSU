@@ -27,7 +27,7 @@ public class TaskDto {
     @NotNull(message = "deadline is required")
     LocalDateTime deadline;
 
-    @NotNull(message = "type (HOMEWORK, BIG_HOMEWORK, PRACTISE, PREPARATION) is required")
+    @NotNull(message = "type (HOMEWORK, BIG_HOMEWORK, PRACTICE, PREPARATION) is required")
     TypeOfTask typeOfTask;
 
     @NotNull(message = "priority (LOW, MEDIUM, HIGH) is required")

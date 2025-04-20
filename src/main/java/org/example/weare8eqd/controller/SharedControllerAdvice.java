@@ -42,4 +42,11 @@ public class SharedControllerAdvice {
                 .status(HttpStatus.NOT_FOUND)
                 .body(new ExceptionResponse(e.getMessage()));
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleOtherExceptions(Exception e) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(new ExceptionResponse(e.getMessage()));
+    }
 }

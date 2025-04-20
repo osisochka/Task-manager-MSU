@@ -1,0 +1,222 @@
+.timer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+}
+
+/* Вкладки Задачи и Фокусировка */
+.timer-tabs {
+    display: flex;
+    max-width: 300px;
+    margin: 0 auto 30px;
+    background: #F5F5F5;
+    border-radius: 100px;
+    overflow: hidden;
+    border: 1px solid #E0E0E0;
+}
+
+.tab-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-item.active {
+    background: #4051B5;
+    color: white;
+    font-weight: 500;
+}
+
+/* Пресеты таймера */
+.timer-presets {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.preset {
+    background: #F5F5F5;
+    border-radius: 100px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+    font-size: 16px;
+}
+
+.preset:hover {
+    background: #ECECEC;
+}
+
+.preset.active {
+    background: #E8EAF6;
+    color: #4051B5;
+    font-weight: 500;
+}
+
+.preset.options {
+    padding: 12px 18px;
+}
+
+/* Основной таймер */
+.timer-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.timer-circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.timer-display {
+    font-size: 80px;
+    font-weight: 300;
+    color: #333;
+}
+
+.timer-button {
+    background: #4051B5;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 12px 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.timer-button:hover {
+    background: #364497;
+}
+
+/* Статистика */
+.timer-stats {
+    margin-bottom: 40px;
+}
+
+.stats-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: #F9F9F9;
+    padding: 20px;
+    border-radius: 12px;
+    width: 48%;
+}
+
+.stat-label {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 24px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Логи таймера */
+.timer-logs {
+    background: #F9F9F9;
+    border-radius: 16px;
+    padding: 30px;
+}
+
+.timer-logs h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #333;
+}
+
+.log-date-group {
+    margin-bottom: 30px;
+}
+
+.log-date-group h3 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.log-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #EEE;
+}
+
+.log-item:last-child {
+    border-bottom: none;
+}
+
+.log-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 15px;
+    position: relative;
+}
+
+.log-icon.pomodoro {
+    border: 2px solid #4051B5;
+}
+
+.log-icon.pomodoro::before {
+    content: "";
+    position: absolute;
+    width: 70%;
+    height: 70%;
+    border: 2px solid #4051B5;
+    border-radius: 50%;
+    top: 15%;
+    left: 15%;
+}
+
+.log-icon.stopwatch {
+    border: 2px solid #FFB800;
+}
+
+.log-icon.stopwatch::before {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 50%;
+    background-color: #FFB800;
+    top: 25%;
+    left: 50%;
+    transform: rotate(-45deg);
+}
+
+.log-time {
+    flex: 1;
+    font-size: 16px;
+    color: #333;
+}
+
+.log-duration {
+    font-size: 16px;
+    color: #666;
+    margin-left: 20px;
+} 

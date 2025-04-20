@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи - Студенческий Дашборд</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tasks-page.css">
+    <link rel="icon" href="/img/MSU.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="img/MSU_2.svg" alt="МГУ">
+        </div>
+        <a href="index.html" class="menu-item">
+            <img src="img/icons/iconoir_home-simple.svg" alt="Home">
+        </a>
+        <a href="calendar.html" class="menu-item">
+            <img src="img/icons/iconoir_calendar.svg" alt="Calendar">
+        </a>
+        <a href="tasks.html" class="menu-item active">
+            <img src="img/icons/iconoir_task-list.svg" alt="Tasks">
+        </a>
+        <a href="schedule.html" class="menu-item">
+            <img src="img/icons/iconoir_timer.svg" alt="Schedule">
+        </a>
+        <a href=http://89.169.39.216:3000/" class="menu-item" target="_blank">
+            <img src="img/icons/help.svg" alt="Help">
+        </a>
+        <a href="profile.html" class="menu-item">
+            <img src="img/icons/iconoir_user.svg" alt="Profile">
+        </a>
+    </aside>
+
+    <main class="content">
+        <div class="tasks-header">
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search">
+                    <img src="img/icons/akar-icons_search.svg" alt="Search">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tasks-container">
+            <div class="tasks-sidebar">
+                <div class="tasks-filters">
+                    <h3>Фильтры</h3>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">Все задачи</button>
+                        <button class="filter-btn" data-filter="active">Активные</button>
+                        <button class="filter-btn" data-filter="archive">Архив</button>
+                    </div>
+                </div>
+                
+                <div class="subjects-list">
+                    <h3>Предметы</h3>
+                    <div class="subject-item">
+                        <div class="checkbox economics checked" data-subject="economics">
+                            <span class="check-icon">✓</span>
+                        </div>
+                        <span>Экономика</span>
+                    </div>
+                    <div class="subject-item">
+                        <div class="checkbox physics checked" data-subject="physics">
+                            <span class="check-icon">✓</span>
+                        </div>
+                        <span>Физика</span>
+                    </div>
+                    <div class="subject-item">
+                        <div class="checkbox math checked" data-subject="math">
+                            <span class="check-icon">✓</span>
+                        </div>
+                        <span>Математика</span>
+                    </div>
+                    <div class="subject-item">
+                        <div class="checkbox english checked" data-subject="english">
+                            <span class="check-icon">✓</span>
+                        </div>
+                        <span>Английский язык</span>
+                    </div>
+                    <div class="subject-item">
+                        <div class="checkbox discrete-math checked" data-subject="discrete-math">
+                            <span class="check-icon">✓</span>
+                        </div>
+                        <span>Дискретная математика</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tasks-content">
+                <div class="tasks-list active-tasks">
+                    <div class="task-items" id="activeTasks">
+                        <!-- Группы предметов будут добавляться динамически -->
+                    </div>
+                </div>
+
+                <div class="archive-section">
+                    <div class="archive-header">
+                        <div class="archive-toggle">▼</div>
+                        <h2>Архив задач</h2>
+                    </div>
+                    <div class="archive-tasks" id="archivedTasks">
+                        <!-- Архивные задачи будут добавляться динамически -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Модальное окно добавления задачи -->
+<div class="modal-overlay" id="addTaskModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>Добавить задачу</h3>
+            <button class="close-modal" id="closeTaskModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="addTaskForm">
+                <div class="form-group">
+                    <label for="taskTitle">Название задачи</label>
+                    <input type="text" id="taskTitle" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskSubject">Предмет</label>
+                    <select id="taskSubject" class="form-control" required>
+                        <option value="">Выберите предмет</option>
+                        <option value="economics">Экономика</option>
+                        <option value="physics">Физика</option>
+                        <option value="math">Математика</option>
+                        <option value="english">Английский язык</option>
+                        <option value="discrete-math">Дискретная математика</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskType">Тип задачи</label>
+                    <select id="taskType" class="form-control" required>
+                        <option value="">Выберите тип</option>
+                        <option value="homework">Домашнее задание</option>
+                        <option value="lab">Лабораторная работа</option>
+                        <option value="test">Контрольная работа</option>
+                        <option value="project">Проект</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDeadline">Срок сдачи</label>
+                    <input type="datetime-local" id="taskDeadline" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskPriority">Приоритет</label>
+                    <select id="taskPriority" class="form-control" required>
+                        <option value="low">Низкий</option>
+                        <option value="medium">Средний</option>
+                        <option value="high">Высокий</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskDescription">Описание</label>
+                    <textarea id="taskDescription" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="btn-row">
+                    <button type="button" class="btn btn-secondary" id="cancelTaskBtn">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/tasks.js"></script>
+</body>
+</html> 

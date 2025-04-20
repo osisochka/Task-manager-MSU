@@ -3,6 +3,7 @@ package org.example.weare8eqd.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -38,5 +39,5 @@ public class User {
 
     @Transient
     @Column(name = "shared_progress")
-    private Set<String> friends;
+    private Set<String> friends = new HashSet<>();
 }

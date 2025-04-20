@@ -4,7 +4,6 @@ WORKDIR /app
 COPY . .
 
 RUN ./gradlew clean bootJar --no-daemon --info
-RUN ls -l /app/build/libs/
 
 FROM eclipse-temurin:23-jre-alpine-3.21
 

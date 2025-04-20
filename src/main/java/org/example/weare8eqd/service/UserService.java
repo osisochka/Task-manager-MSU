@@ -1,5 +1,6 @@
 package org.example.weare8eqd.service;
 
+import org.example.weare8eqd.dto.AddFriend;
 import org.example.weare8eqd.dto.CreateUserDto;
 import org.example.weare8eqd.dto.UpdateUserDto;
 import org.example.weare8eqd.dto.UserDto;
@@ -20,4 +21,5 @@ public interface UserService {
 
     void deleteUser(Integer userId);
 
+    void shareProgress(Integer userId, AddFriend login);
 }

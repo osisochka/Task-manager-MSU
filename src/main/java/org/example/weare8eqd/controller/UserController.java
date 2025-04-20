@@ -61,4 +61,13 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.ok("user with id=" + userId + " successfully deleted");
     }
+
+    @PostMapping("/share/{userId}")
+    public ResponseEntity<String> shareProgress(
+            @PathVariable Integer userId,
+            @RequestBody @Valid AddFriend login) {
+
+        userService.shareProgress(userId, login);
+        return ResponseEntity.ok("user with id=" + userId + " is now friends with user with login=" + login.getLogin());
+    }
 }

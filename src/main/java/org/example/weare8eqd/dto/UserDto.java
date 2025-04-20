@@ -13,13 +13,14 @@ import java.util.Set;
 @Setter
 @Builder
 public class UserDto {
-    @NotBlank
+
+    @NotBlank(message = "givenName is required")
     String givenName;
 
-    @NotBlank
+    @NotBlank(message = "familyName is required")
     String familyName;
 
-    @NotBlank
+    @NotBlank(message = "login is required")
     String login;
 
     Set<String> friends; // login list

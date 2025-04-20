@@ -86,6 +86,21 @@ public class UserServiceImpl implements UserService {
         else throw new ItemNotFoundException("user with id=" + userId + " not found");
     }
 
+    @Override
+    @Transactional
+    public void shareProgress(Integer userId, AddFriend login) {
+
+        User userFrom = userRepository.findById(userId).orElseThrow(
+                () -> new ItemNotFoundException("user with id=" + userId + " not found")
+        );
+        User userTo = userRepository.findByLogin(login.getLogin()).orElseThrow(
+                () -> new ItemNotFoundException("user with login=" + login.getLogin() + " not found")
+        );
+
+        userFrom.getFriends().add(userTo.getLogin());
+        userRepository.save(userFrom);
+    }
+
     private UserDto toDto(User user) {
 
         if (user == null) return null;
